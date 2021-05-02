@@ -60,7 +60,22 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
           IconButton(
             icon: Icon(Icons.camera),
             color: Colors.green,
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        ListTile(
+                          leading: new Icon(Icons.wb_twighlight),
+                          title: new Text(
+                              'It\'s okay not to be okay. No one is perfect!'),
+                        ),
+                      ],
+                    );
+                  });
+            },
           ),
         ],
       ),

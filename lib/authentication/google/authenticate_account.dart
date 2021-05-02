@@ -3,10 +3,21 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:greensundiary/authentication/google/continue_with_google.dart';
 import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AuthenticateAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ///I do the privacy policy link as follows.
+    const _url = "https://www.websitepolicies.com/policies/view/w5FUCITc";
+    launchURL(String url) async {
+      if (await canLaunch(url)) {
+        await launch(url, forceWebView: true);
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
+
     ///disabling landscape mode
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -20,7 +31,33 @@ class AuthenticateAccount extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.help_center_outlined),
             color: Colors.green,
-            onPressed: () {},
+
+            ///
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        ListTile(
+                          leading: new Icon(Icons.settings),
+                          title: new Text('Privacy policy'),
+                          onTap: () {
+                            launchURL(_url);
+                          },
+                        ),
+                        ListTile(
+                          leading: new Icon(Icons.share),
+                          title: new Text('Share'),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    );
+                  });
+            },
           ),
         ],
       ),
@@ -64,29 +101,29 @@ class AuthenticateAccount extends StatelessWidget {
                   height: MediaQuery.of(context).size.width),
 
               ///social media share icons.
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    icon: Icon(FontAwesomeIcons.whatsapp),
-                    onPressed: () {},
-                    hoverColor: Colors.green,
-                    iconSize: 25,
-                  ),
-                  IconButton(
-                    icon: Icon(FontAwesomeIcons.twitter),
-                    onPressed: () {},
-                    hoverColor: Colors.green,
-                    iconSize: 25,
-                  ),
-                  IconButton(
-                    icon: Icon(FontAwesomeIcons.googlePlay),
-                    onPressed: () {},
-                    hoverColor: Colors.green,
-                    iconSize: 25,
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     IconButton(
+              //       icon: Icon(FontAwesomeIcons.whatsapp),
+              //       onPressed: () {},
+              //       hoverColor: Colors.green,
+              //       iconSize: 25,
+              //     ),
+              //     IconButton(
+              //       icon: Icon(FontAwesomeIcons.twitter),
+              //       onPressed: () {},
+              //       hoverColor: Colors.green,
+              //       iconSize: 25,
+              //     ),
+              //     IconButton(
+              //       icon: Icon(FontAwesomeIcons.googlePlay),
+              //       onPressed: () {},
+              //       hoverColor: Colors.green,
+              //       iconSize: 25,
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),

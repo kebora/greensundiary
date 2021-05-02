@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MaterialApp(
-      theme: ThemeData.dark(),
+      // theme: ThemeData.dark(),
       home: MyApp(),
     ),
   );
