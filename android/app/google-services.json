@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "164163401313",
+    "project_id": "smile-e4ad0",
+    "storage_bucket": "smile-e4ad0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164163401313:android:0ad84c36a477ed7d4ddc20",
+        "android_client_info": {
+          "package_name": "com.simiyu.greensundiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdX4jUkoyHCcca_n-8HlDe5xJVp6OyfJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
