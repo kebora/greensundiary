@@ -18,7 +18,7 @@ class AuthenticateAccount extends StatelessWidget {
       }
     }
 
-    ///disabling landscape mode
+    ///disabling landscape mode.
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -45,13 +45,6 @@ class AuthenticateAccount extends StatelessWidget {
                           title: new Text('Privacy policy'),
                           onTap: () {
                             launchURL(_url);
-                          },
-                        ),
-                        ListTile(
-                          leading: new Icon(Icons.share),
-                          title: new Text('Share'),
-                          onTap: () {
-                            Navigator.pop(context);
                           },
                         ),
                       ],
@@ -99,31 +92,6 @@ class AuthenticateAccount extends StatelessWidget {
               ///
               Lottie.asset("assets/images/walking.json",
                   height: MediaQuery.of(context).size.width),
-
-              ///social media share icons.
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     IconButton(
-              //       icon: Icon(FontAwesomeIcons.whatsapp),
-              //       onPressed: () {},
-              //       hoverColor: Colors.green,
-              //       iconSize: 25,
-              //     ),
-              //     IconButton(
-              //       icon: Icon(FontAwesomeIcons.twitter),
-              //       onPressed: () {},
-              //       hoverColor: Colors.green,
-              //       iconSize: 25,
-              //     ),
-              //     IconButton(
-              //       icon: Icon(FontAwesomeIcons.googlePlay),
-              //       onPressed: () {},
-              //       hoverColor: Colors.green,
-              //       iconSize: 25,
-              //     ),
-              //   ],
-              // ),
             ],
           ),
         ),

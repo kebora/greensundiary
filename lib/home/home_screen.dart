@@ -9,6 +9,7 @@ import 'package:greensundiary/diary/add_diary_screen.dart';
 import 'package:greensundiary/diary/chart.dart';
 import 'package:greensundiary/diary/view_created_diaries.dart';
 import 'package:lottie/lottie.dart';
+import 'package:social_share/social_share.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({this.user});
@@ -146,7 +147,10 @@ class ChartAndShare extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: Icon(FontAwesomeIcons.share),
-                      onPressed: () {},
+                      onPressed: () {
+                        SocialShare.shareOptions(
+                            "Hey friend, download green sun diary from google PlayStore and start updating your green sun.");
+                      },
                       hoverColor: Colors.green,
                       iconSize: 25,
                     ),

@@ -63,10 +63,6 @@ class ReadDiaryScreen extends StatelessWidget {
                     if (snapshot.hasError) {
                       return Text("Something went wrong!");
                     }
-
-                    ///todo: in this section, I will have to add a nicer placeholder,
-                    /// like an interactive cat in a box. and a redirect button to create
-                    /// new diary.
                     if (snapshot.hasData && !snapshot.data.exists) {
                       return Text("Document does not exist");
                     }
@@ -85,10 +81,12 @@ class ReadDiaryScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                data['title'],
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                                textScaleFactor: 1.5,
+                              Flexible(
+                                child: Text(
+                                  data['title'],
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  textScaleFactor: 1.5,
+                                ),
                               ),
                             ],
                           ),

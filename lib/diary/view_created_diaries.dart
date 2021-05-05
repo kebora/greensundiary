@@ -3,8 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/services.dart';
 import 'package:greensundiary/constants.dart';
+import 'package:greensundiary/diary/article_screen.dart';
 import 'package:greensundiary/diary/read_diary_screen.dart';
 
 ///I choose to display the following categories based on user filter choice.
@@ -77,6 +78,11 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
 
   @override
   Widget build(BuildContext context) {
+    ///disable landscape mode
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     ///a query for diary deletion
     Future<void> _deleteDiary(String id) {
       return FirebaseFirestore.instance
@@ -149,14 +155,17 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
           ),
         ],
       ),
-
-      ///todo: redirect to the articles page.
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
         child: OutlinedButton.icon(
-          icon: Icon(FontAwesomeIcons.newspaper),
-          label: Text("Our pick for Today"),
-          onPressed: () {},
+          icon: Icon(Icons.person_pin),
+          label: Text("Today\'s article!"),
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (BuildContext context) {
+              return ArticleScreen();
+            }));
+          },
           style: ElevatedButton.styleFrom(
             side: BorderSide(width: 1.0, color: Colors.blue),
             shape: RoundedRectangleBorder(
