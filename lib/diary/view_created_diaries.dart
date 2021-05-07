@@ -4,7 +4,6 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:greensundiary/constants.dart';
 import 'package:greensundiary/diary/article_screen.dart';
 import 'package:greensundiary/diary/read_diary_screen.dart';
 
@@ -83,6 +82,7 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
     ///a query for diary deletion
     Future<void> _deleteDiary(String id) {
       return FirebaseFirestore.instance
@@ -210,7 +210,7 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                 ListTile(
                                   title: Text(
                                     document.data()['dateCreated'],
-                                    style: TextStyle(fontFamily: fontRegular),
+                                    style: TextStyle(),
                                     textScaleFactor: 1.5,
                                   ),
                                   onTap: () {
@@ -228,7 +228,6 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                     child: Text(
                                       "",
                                       style: TextStyle(
-                                          fontFamily: fontRegular,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     backgroundColor: document.data()['mood'] ==

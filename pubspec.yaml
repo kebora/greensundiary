@@ -43,6 +43,7 @@ dependencies:
   url_launcher: ^6.0.3
   rive: ^0.7.5
   social_share: ^2.1.1
+  shared_preferences: ^2.0.5
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -64,6 +65,7 @@ flutter:
         - asset: assets/fonts/Pacifico-Regular.ttf
   assets:
     - assets/images/
+    - assets/images/background/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

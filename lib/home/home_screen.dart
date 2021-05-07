@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cool_alert/cool_alert.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:greensundiary/authentication/google/authenticate_account.dart';
 import 'package:greensundiary/diary/add_diary_screen.dart';
 import 'package:greensundiary/diary/chart.dart';
 import 'package:greensundiary/diary/view_created_diaries.dart';
+import 'package:greensundiary/main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:social_share/social_share.dart';
 
@@ -15,9 +14,54 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({this.user});
   final User user;
 
-  ///todo: can move signOut functionality to drawer.
-  Future<void> _signOut() async {
-    await FirebaseAuth.instance.signOut();
+  void handleClick(String value) {
+    switch (value) {
+      case 'Logout':
+        break;
+      case 'Settings':
+        break;
+    }
+  }
+
+  Future<void> _signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut().then((value) {
+      Navigator.of(context).pop();
+    }).whenComplete(() => Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
+          return MyApp();
+        })));
+  }
+
+  Widget _logoutThemePopUp(BuildContext context) {
+    return new AlertDialog(
+      title: const Text('My Account'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          //todo: dark theme here.
+          // ListTile(
+          //   title: Text("Change Theme"),
+          //   leading: Icon(Icons.wb_sunny),
+          //   onTap: () {},
+          // ),
+          ListTile(
+              title: Text("Logout"),
+              leading: Icon(Icons.logout),
+              onTap: () {
+                _signOut(context);
+              }),
+        ],
+      ),
+      actions: <Widget>[
+        new TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Cancel'),
+        ),
+      ],
+    );
   }
 
   Widget build(BuildContext context) {
@@ -35,35 +79,14 @@ class HomeScreen extends StatelessWidget {
               color: Colors.green,
             ),
             color: Colors.green,
-            // onPressed: () {
-            //   // return Scaffold.of(context).openDrawer();
-            // },
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.logout),
-            color: Colors.green,
             onPressed: () {
-              CoolAlert.show(
+              showDialog(
                   context: context,
-                  type: CoolAlertType.warning,
-                  confirmBtnText: "Continue",
-                  title: "Logout?",
-                  text: "You will be returned to the authentication screen.",
-                  animType: CoolAlertAnimType.slideInRight,
-                  onConfirmBtnTap: () {
-                    Navigator.of(context).pop();
-                    _signOut().whenComplete(() {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return AuthenticateAccount();
-                      }));
-                    });
-                  });
+                  builder: (BuildContext context) =>
+                      _logoutThemePopUp(context));
             },
           ),
-        ],
+        ),
       ),
       //todo: drawer can be added from here.
       // drawer: HomeDrawer(
