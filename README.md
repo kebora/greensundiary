@@ -1,4 +1,4 @@
-# Green Sun Diary (A mental health approach)
+# Green Sun Diary
 
 For how long can you maintain the green sun? No worries, we do not expect you to anyways! This is a mental health oriented diary entry application, made to help people monitor their progress from every activity that they pertake in. We also offer users access to daily articles by people who went through challenging situations in life and are winning at the moment, those still trying to cope, and from experts in the industry. I made this application in honor of the Mental health awareness Month which runs from 1st to 31st May and probably beyond :)
 
