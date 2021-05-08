@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:greensundiary/home/home_screen.dart';
 import 'package:rxdart/rxdart.dart';
-
-import 'file:///C:/Users/user/AndroidStudioProjects/tmn/lib/home/home_screen.dart';
 
 import 'login_validators.dart';
 
@@ -60,10 +59,12 @@ class LoginBloc extends Object with LoginValidators {
         );
       } else {
         //openHomePage
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(user),
+            builder: (context) => HomeScreen(
+              user: user,
+            ),
           ),
         );
       }

@@ -37,7 +37,7 @@ class _MyAppLogicStarts extends StatelessWidget {
             User user = FirebaseAuth.instance.currentUser;
             if (user != null) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
-                return Navigator.of(context).push(
+                return Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => HomeScreen(user: user),
                   ),

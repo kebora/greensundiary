@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:greensundiary/authentication/auth_bloc/signup/signup_validators.dart';
+import 'package:greensundiary/main.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SignUpBloc extends Object with SignUpValidators {
@@ -72,7 +73,11 @@ class SignUpBloc extends Object with SignUpValidators {
         );
       });
       //show login page by changing state
-
+      //I decide to do this because it will default to the login interface.
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
+        return MyApp();
+      }));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         //

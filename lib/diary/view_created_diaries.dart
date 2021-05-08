@@ -263,9 +263,10 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                                       ? Colors.green
                                                       : Colors.red,
                                           onConfirmBtnTap: () {
-                                            Navigator.of(context).pop();
                                             _deleteDiary(document.id)
-                                                .whenComplete(() {
+                                                .then((value) {
+                                              Navigator.of(context).pop();
+                                            }).whenComplete(() {
                                               return AlertNoServerAutoDialog(
                                                   context: context,
                                                   alertAnimateType:
