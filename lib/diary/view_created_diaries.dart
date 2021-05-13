@@ -4,7 +4,6 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:greensundiary/diary/article_screen.dart';
 import 'package:greensundiary/diary/read_diary_screen.dart';
 
 ///I choose to display the following categories based on user filter choice.
@@ -154,25 +153,6 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
             },
           ),
         ],
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: OutlinedButton.icon(
-          icon: Icon(Icons.person_pin),
-          label: Text("Today\'s article!"),
-          onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (BuildContext context) {
-              return ArticleScreen();
-            }));
-          },
-          style: ElevatedButton.styleFrom(
-            side: BorderSide(width: 1.0, color: Colors.blue),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32.0),
-            ),
-          ),
-        ),
       ),
       body: SafeArea(
         child: Padding(

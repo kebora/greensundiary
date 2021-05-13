@@ -14,7 +14,7 @@ void main() async {
   String cVal = prefs.getString('myTheme');
   runApp(
     MaterialApp(
-      theme: cVal == "dark" ? ThemeData.dark() : ThemeData.light(),
+      theme: ThemeData.dark(),
       home: MyApp(),
     ),
   );

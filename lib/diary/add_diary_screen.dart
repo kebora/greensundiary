@@ -57,7 +57,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.camera),
+            icon: Icon(Icons.info_outline_rounded),
             color: Colors.green,
             onPressed: () {
               showModalBottomSheet(

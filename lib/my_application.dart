@@ -23,7 +23,7 @@ class MyApplication extends StatelessWidget {
       child: LoginProvider(
         child: RPProvider(
           child: MaterialApp(
-            // theme: ThemeData.dark(),
+            theme: ThemeData.dark(),
             title: 'greensundiary',
             // Calling the authentication screen
             home: Scaffold(

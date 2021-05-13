@@ -161,7 +161,7 @@ class MarqueeText extends StatelessWidget {
                     child: Center(
                       child: Marquee(
                         text:
-                            "GreenSun ${DateTime.now().year} : ${data['marquee']} ",
+                            "Green Sun Diary ${DateTime.now().year} : ${data['marquee']} ",
                         velocity: 40,
                         textScaleFactor: 1.3,
                         style: TextStyle(

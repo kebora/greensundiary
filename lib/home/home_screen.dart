@@ -3,12 +3,13 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:greensundiary/constants.dart';
 import 'package:greensundiary/diary/add_diary_screen.dart';
+import 'package:greensundiary/diary/article_screen.dart';
 import 'package:greensundiary/diary/chart.dart';
 import 'package:greensundiary/diary/view_created_diaries.dart';
 import 'package:greensundiary/main.dart';
 import 'package:lottie/lottie.dart';
-import 'package:social_share/social_share.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({this.user});
@@ -71,6 +72,23 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: Colors.white10,
+              ),
+              onPressed: () {
+                return showDialog(
+                    context: context,
+                    builder: (_) {
+                      return AlertDialog(
+                        title: Text("Account Management"),
+                        content: Text(accountDeactivation),
+                      );
+                    });
+              })
+        ],
         backgroundColor: Colors.transparent,
         leading: Builder(
           builder: (context) => IconButton(
@@ -95,13 +113,14 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
         child: OutlinedButton.icon(
-          icon: Icon(FontAwesomeIcons.bookOpen),
-          label: Text("Add new Diary"),
+          icon: Icon(FontAwesomeIcons.book),
+          label: Text("View Diaries"),
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (BuildContext context) {
-              return AddDiaryScreen();
-            }));
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) {
+                return ViewCreatedDiaries();
+              },
+            ));
           },
           style: ElevatedButton.styleFrom(
             side: BorderSide(width: 1.0, color: Colors.blue),
@@ -169,22 +188,23 @@ class ChartAndShare extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
-                      icon: Icon(FontAwesomeIcons.share),
+                      icon: Icon(FontAwesomeIcons.newspaper),
                       onPressed: () {
-                        SocialShare.shareOptions(
-                            "Hey friend, download green sun diary from google PlayStore and start updating your green sun.");
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return ArticleScreen();
+                        }));
                       },
                       hoverColor: Colors.green,
                       iconSize: 25,
                     ),
                     IconButton(
-                      icon: Icon(FontAwesomeIcons.book),
+                      icon: Icon(FontAwesomeIcons.featherAlt),
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return ViewCreatedDiaries();
-                          },
-                        ));
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return AddDiaryScreen();
+                        }));
                       },
                       hoverColor: Colors.green,
                       iconSize: 25,
@@ -207,7 +227,7 @@ class ChartAndShare extends StatelessWidget {
               Lottie.asset("assets/images/emptychart.json",
                   width: MediaQuery.of(context).size.width / 2),
               Text(
-                "Add a diary to unlock the chart, and more!",
+                "Add a diary to unlock the chart!",
                 style: TextStyle(
                   color: Colors.red,
                   fontWeight: FontWeight.bold,
