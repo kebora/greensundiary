@@ -6,14 +6,12 @@ import 'package:greensundiary/authentication/auth_bloc/google/continue_with_goog
 import 'package:greensundiary/authentication/auth_bloc/logo_bloc/logo_movement_bloc.dart';
 import 'package:greensundiary/home/home_screen.dart';
 import 'package:greensundiary/my_application.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String cVal = prefs.getString('myTheme');
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: MyApp(),
     ),
@@ -54,35 +52,36 @@ class _MyAppLogicStarts extends StatelessWidget {
             }
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/background/playstore.png",
-                      height: 100,
-                    ),
-                    Text("retrieving data..."),
-                  ],
-                ),
-              ),
+            return _Message(
+              myText: "retrieving data...",
             );
           }
-          return Scaffold(
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/images/background/playstore.png",
-                    height: 100,
-                  ),
-                  Text("A critical error occurred!"),
-                ],
-              ),
-            ),
+          return _Message(
+            myText: "working on your application...",
           );
         });
+  }
+}
+
+class _Message extends StatelessWidget {
+  const _Message({Key key, this.myText}) : super(key: key);
+  final String myText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/images/background/playstore.png",
+              height: 100,
+            ),
+            Text(myText),
+          ],
+        ),
+      ),
+    );
   }
 }

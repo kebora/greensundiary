@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,59 +16,35 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({this.user});
   final User user;
 
-  void handleClick(String value) {
-    switch (value) {
-      case 'Logout':
-        break;
-      case 'Settings':
-        break;
-    }
-  }
-
-  Future<void> _signOut(BuildContext context) async {
-    await FirebaseAuth.instance.signOut().then((value) {
-      Navigator.of(context).pop();
-    }).whenComplete(() => Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
-          return MyApp();
-        })));
-  }
-
-  Widget _logoutThemePopUp(BuildContext context) {
-    return new AlertDialog(
-      title: const Text('My Account'),
-      content: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          //todo: dark theme here.
-          // ListTile(
-          //   title: Text("Change Theme"),
-          //   leading: Icon(Icons.wb_sunny),
-          //   onTap: () {},
-          // ),
-          ListTile(
-              title: Text("Logout"),
-              leading: Icon(Icons.logout),
-              onTap: () {
-                _signOut(context);
-              }),
-        ],
-      ),
-      actions: <Widget>[
-        new TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text('Cancel'),
-        ),
-      ],
+  /// Logout dialog
+  _logoutPopUp(BuildContext context) {
+    return CoolAlert.show(
+      context: context,
+      type: CoolAlertType.confirm,
+      text: "Do you want to logout?",
+      confirmBtnText: "Yes",
+      cancelBtnText: "No",
+      confirmBtnColor: Colors.green,
+      onConfirmBtnTap: () {
+        Navigator.of(context).pop(this);
+        FirebaseAuth.instance.signOut().whenComplete(() {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (BuildContext context) {
+            return MyApp();
+          }));
+        });
+      },
+      animType: CoolAlertAnimType.rotate,
     );
   }
 
+  /// end logout dialog
+
   Widget build(BuildContext context) {
     ///todo: obtain username from email.
-    int index = user.email.indexOf('@') ?? 0;
+    String firstName = user.displayName.toString();
+    int firstIndex = firstName.indexOf(' ') ?? 0;
+    firstName = firstName.substring(0, firstIndex);
 
     return Scaffold(
       appBar: AppBar(
@@ -75,8 +52,8 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               icon: Icon(
-                Icons.settings,
-                color: Colors.white10,
+                Icons.settings_outlined,
+                color: Colors.green,
               ),
               onPressed: () {
                 return showDialog(
@@ -90,26 +67,17 @@ class HomeScreen extends StatelessWidget {
               })
         ],
         backgroundColor: Colors.transparent,
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: Icon(
-              Icons.circle,
-              color: Colors.green,
-            ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.logout,
             color: Colors.green,
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) =>
-                      _logoutThemePopUp(context));
-            },
           ),
+          color: Colors.green,
+          onPressed: () {
+            _logoutPopUp(context);
+          },
         ),
       ),
-      //todo: drawer can be added from here.
-      // drawer: HomeDrawer(
-      //   user: user,
-      // ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
         child: OutlinedButton.icon(
@@ -142,7 +110,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome ${user.email.substring(0, index)}, below is your green sun chart!",
+                  "Welcome $firstName, below is your green sun chart!",
                   style: TextStyle(
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
