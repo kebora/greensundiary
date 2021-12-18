@@ -8,8 +8,7 @@ import 'package:greensundiary/authentication/auth_bloc/login/reset_password/rp_b
 import 'package:greensundiary/authentication/auth_bloc/login/reset_password/rp_bloc/rp_provider.dart';
 import 'package:greensundiary/constants.dart';
 import 'package:greensundiary/home/home_screen.dart';
-
-import 'file:///C:/Users/user/AndroidStudioProjects/tmn/lib/logo/logo_switch.dart';
+import 'package:greensundiary/logo/logo_switch.dart';
 
 class LoginScreen extends StatelessWidget {
   @override

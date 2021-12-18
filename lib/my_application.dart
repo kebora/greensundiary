@@ -24,7 +24,6 @@ class MyApplication extends StatelessWidget {
         child: RPProvider(
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: ThemeData.dark(),
             title: 'greensundiary',
             // Calling the authentication screen
             home: Scaffold(

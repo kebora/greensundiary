@@ -5,9 +5,8 @@ import 'package:greensundiary/authentication/auth_bloc/google/continue_with_goog
 import 'package:greensundiary/authentication/auth_bloc/signup/signup_bloc.dart';
 import 'package:greensundiary/authentication/auth_bloc/signup/signup_provider.dart';
 import 'package:greensundiary/constants.dart';
+import 'package:greensundiary/logo/logo_switch.dart';
 import 'package:lottie/lottie.dart';
-
-import 'file:///C:/Users/user/AndroidStudioProjects/tmn/lib/logo/logo_switch.dart';
 
 class SignUpScreen extends StatelessWidget {
   @override

@@ -182,8 +182,6 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (context, index) {
                           DocumentSnapshot document = snapshot.data.docs[index];
-                          print(
-                              "The id of the document is as follows${document.id}");
                           return Card(
                             child: Column(
                               children: [
