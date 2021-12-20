@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:greensundiary/diary/bloc/bloc.dart';
 import 'package:intl/intl.dart';
@@ -115,6 +117,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
             textScaleFactor: 1.5,
             style: TextStyle(
               color: Colors.green,
+              fontWeight: FontWeight.bold,
             ),
           ),
           onTap: () => _selectDate(context),
@@ -138,10 +141,10 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                       onChanged: bloc.changeTitleText,
                       decoration: InputDecoration(
                           hintText: 'Title',
-                          // border: OutlineInputBorder(),
-                          // icon: Icon(
-                          //   FontAwesomeIcons.brain,
-                          // ),
+                          border: OutlineInputBorder(),
+                          icon: Icon(
+                            FontAwesomeIcons.bookmark,
+                          ),
                           errorText: snapshot.error),
                       maxLength: 50,
                     );
@@ -160,10 +163,10 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                       decoration: InputDecoration(
                         // icon: Icon(FontAwesomeIcons.penNib),
                         hintText: 'What happened...',
-                        // border: OutlineInputBorder(),
+                        border: OutlineInputBorder(),
                         errorText: snapshot.error,
                       ),
-                      minLines: 10,
+                      minLines: 1,
                       maxLines: 10,
                       maxLength: -1,
                     );
@@ -179,15 +182,19 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
   Widget moodCard(Bloc bloc) {
     return Column(
       children: [
-        Text(
-          "How would you rate this experience?",
-          textScaleFactor: 1.5,
-          style: TextStyle(color: Colors.green),
+        Divider(
+          color: Colors.blueGrey,
+          thickness: 5,
         ),
         Column(
           children: [
             RadioListTile(
-                title: Text("Green"),
+                title: Text(
+                  "Green",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 secondary: Icon(
                   FontAwesomeIcons.smileBeam,
                   color: Colors.green,
@@ -200,7 +207,12 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                   });
                 }),
             RadioListTile(
-                title: Text("Blue"),
+                title: Text(
+                  "Blue",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 secondary: Icon(
                   FontAwesomeIcons.smile,
                   color: Colors.blue,
@@ -213,7 +225,12 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                   });
                 }),
             RadioListTile(
-                title: Text("Red"),
+                title: Text(
+                  "Red",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 secondary: Icon(
                   FontAwesomeIcons.frown,
                   color: Colors.red,
@@ -225,66 +242,11 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                     mood = value;
                   });
                 }),
-            GestureDetector(
-              child: Text(
-                "learn more",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          ListTile(
-                            leading: new CircleAvatar(
-                              backgroundColor: Colors.green,
-                            ),
-                            title: new Text('Good'),
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                "Your mental condition is great and has not been negatively affected by the experience!"),
-                          ),
-                          ListTile(
-                            leading: new CircleAvatar(
-                              backgroundColor: Colors.blue,
-                            ),
-                            title: new Text('Average'),
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                "Your mental condition is slightly negatively affected, you need some time on your own to recover fully!"),
-                          ),
-                          ListTile(
-                            leading: new CircleAvatar(
-                              backgroundColor: Colors.red,
-                            ),
-                            title: new Text('Not good'),
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                "Your mental condition has been negatively affected, the only way to recover is by sharing your experience with someone!"),
-                          ),
-                        ],
-                      );
-                    });
-              },
+            Divider(
+              color: Colors.blueGrey,
+              thickness: 5,
             ),
-            Divider(),
+            Padding(padding: EdgeInsets.only(bottom: 10)),
           ],
         ),
       ],
