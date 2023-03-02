@@ -18,32 +18,30 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 3.0.0+5
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=3.0.0-277.0.dev <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_circular_text: ^0.3.1
-  font_awesome_flutter: ^9.0.0
-  lottie: ^1.0.1
+  font_awesome_flutter: ^10.4.0
+  lottie: ^2.2.0
   intl: ^0.17.0
-  pie_chart: ^5.0.0
-  google_sign_in: "^4.5.1"
-  firebase_core: ^1.0.4
-  firebase_auth: ^1.1.1
-  flutter_bloc: ^7.0.0
-  rxdart: ^0.26.0
-  cloud_firestore: "^1.0.7"
-  automate_alert: ^0.0.1
-  animated_text_kit: ^4.2.1
-  cool_alert: ^1.0.1
-  double_back_to_close_app: ^2.0.1
-  marquee: ^2.1.0
-  share: ^2.0.1
-  url_launcher: ^6.0.3
-  rive: ^0.7.5
-  social_share: ^2.1.1
-  shared_preferences: ^2.0.5
+  pie_chart: ^5.3.2
+  google_sign_in: ^6.0.1
+  firebase_core: ^2.7.0
+  firebase_auth: ^4.2.9
+  flutter_bloc: ^8.1.2
+  rxdart: ^0.27.7
+  cloud_firestore: ^4.4.3
+  animated_text_kit: ^4.2.2
+  cool_alert: ^2.0.1
+  double_back_to_close_app: ^2.1.0
+  marquee: ^2.2.3
+  url_launcher: ^6.1.10
+  rive: ^0.10.2
+  social_share: ^2.3.1
+  shared_preferences: ^2.0.18
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -101,7 +101,7 @@ Widget _inputPassword(SignUpBloc bloc) {
 Widget _inputConfirmPassword(SignUpBloc bloc) {
   return StreamBuilder<Object>(
       stream: bloc.confirmPassword,
-      builder: (context, snapshot) {
+      builder: (context,snapshot) {
         return Padding(
           padding: const EdgeInsets.only(right: 16.0, left: 3.0),
           child: TextField(
