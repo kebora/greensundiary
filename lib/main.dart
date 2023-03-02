@@ -27,19 +27,21 @@ class MyApp extends StatelessWidget {
 class _MyAppLogicStarts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    late User user;
     return FutureBuilder(
         future: Authentication.initializeFirebase(context),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            User user = FirebaseAuth.instance.currentUser;
-            if (user != null) {
+            user = FirebaseAuth.instance.currentUser!;
+            if (user!=null) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
-                return Navigator.of(context).pushReplacement(
+                Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => HomeScreen(user: user),
                   ),
                 );
               });
+
             }
 
             ///if no user, authenticate!
@@ -63,7 +65,7 @@ class _MyAppLogicStarts extends StatelessWidget {
 }
 
 class _Message extends StatelessWidget {
-  const _Message({Key key, this.myText}) : super(key: key);
+  const _Message({Key? key, required this.myText}) : super(key: key);
   final String myText;
 
   @override
