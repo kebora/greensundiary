@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class Chart extends StatelessWidget {
-  Chart({this.user});
+  Chart({required this.user});
   final User user;
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class Chart extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData && snapshot.data.exists) {
+            if (snapshot.hasData && snapshot.data!.exists) {
               return PieChart(
                 colorList: [
                   Colors.green,
@@ -31,9 +31,9 @@ class Chart extends StatelessWidget {
                   Colors.red,
                 ],
                 dataMap: {
-                  "Greens": snapshot.data['greenSun'] + .0,
-                  "Blues": snapshot.data['blueSun'] + .0,
-                  "Reds": snapshot.data['redSun'] + .0,
+                  "Greens": snapshot.data?['greenSun'] + .0,
+                  "Blues": snapshot.data?['blueSun'] + .0,
+                  "Reds": snapshot.data?['redSun'] + .0,
                 },
                 chartRadius: MediaQuery.of(context).size.width / 2,
                 legendOptions:

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ReadDiaryScreen extends StatelessWidget {
-  ReadDiaryScreen({this.diaryId, this.userID});
+  ReadDiaryScreen({required this.diaryId,required this.userID});
   final String diaryId;
   final String userID;
   @override
@@ -63,17 +63,17 @@ class ReadDiaryScreen extends StatelessWidget {
                     if (snapshot.hasError) {
                       return Text("Something went wrong!");
                     }
-                    if (snapshot.hasData && !snapshot.data.exists) {
+                    if (snapshot.hasData && !snapshot.data!.exists) {
                       return Text("Document does not exist");
                     }
                     if (snapshot.connectionState == ConnectionState.done) {
-                      Map<String, dynamic> data = snapshot.data.data();
+                      Map<String, dynamic>? data = snapshot.data?.data() as Map<String, dynamic>?;
                       return Column(
                         children: [
                           Row(
                             children: [
                               Text(
-                                data['dateCreated'],
+                                data?['dateCreated'],
                                 textScaleFactor: 1.5,
                               ),
                             ],
@@ -83,7 +83,7 @@ class ReadDiaryScreen extends StatelessWidget {
                             children: [
                               Flexible(
                                 child: Text(
-                                  data['title'],
+                                  data?['title'],
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                   textScaleFactor: 1.5,
                                 ),
@@ -91,7 +91,7 @@ class ReadDiaryScreen extends StatelessWidget {
                             ],
                           ),
                           Text(
-                            data['body'],
+                            data?['body'],
                             textScaleFactor: 1.3,
                           ),
                         ],
