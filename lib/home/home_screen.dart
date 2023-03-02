@@ -13,7 +13,7 @@ import 'package:greensundiary/main.dart';
 import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({this.user});
+  HomeScreen({required this.user});
   final User user;
 
   /// Logout dialog
@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
   /// end logout dialog
 
   Widget build(BuildContext context) {
-    ///todo: obtain username from email.
+    // Obtain username from email.
     String firstName = user.displayName.toString();
     int firstIndex = firstName.indexOf(' ') ?? 0;
     firstName = firstName.substring(0, firstIndex);
@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.green,
               ),
               onPressed: () {
-                return showDialog(
+                showDialog(
                     context: context,
                     builder: (_) {
                       return AlertDialog(
