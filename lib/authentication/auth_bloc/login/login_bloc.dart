@@ -9,7 +9,7 @@ import 'login_validators.dart';
 class LoginBloc extends Object with LoginValidators {
   // database configurations
   final _auth = FirebaseAuth.instance;
-  UserCredential _userCredential;
+  late UserCredential _userCredential;
   //
   final _email = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
@@ -42,16 +42,16 @@ class LoginBloc extends Object with LoginValidators {
 
   //signIn function
   Future<void> signIn(
-      {BuildContext context, String userEmail, String userPassword}) async {
+      {required BuildContext context, required String userEmail,required String userPassword}) async {
     try {
       _userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: userEmail, password: userPassword);
-      User user = FirebaseAuth.instance.currentUser;
-      if (!user.emailVerified) {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user!.emailVerified) {
         //If I choose to send a verification link again,
         // that would be extravagant, so I decide not to do that.
         // await user.sendEmailVerification();
-        return ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("Check your email for the verification link!"),
             backgroundColor: Colors.redAccent,
@@ -69,10 +69,10 @@ class LoginBloc extends Object with LoginValidators {
         );
       }
     } catch (err) {
-      return ScaffoldMessenger.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(err.message),
-          backgroundColor: Theme.of(context).errorColor,
+          content: Text(err.toString()),
+          backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
     }
