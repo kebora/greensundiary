@@ -51,7 +51,6 @@ class ArticleScreen extends StatelessWidget {
                               ConnectionState.done) {
                             // Object? data = snapshot.data!.data();
                             Map<String, dynamic>? data = snapshot.data?.data() as Map<String, dynamic>?;
-                            // String? data = snapshot.data!.data().toString();
                             return Column(
                               children: [
                                 Row(
@@ -115,7 +114,9 @@ class MarqueeText extends StatelessWidget {
               return Text("Document does not exist");
             }
             if (snapshot.connectionState == ConnectionState.done) {
-              Object? data = snapshot.data?.data();
+              //todo: change this
+              // Object? data = snapshot.data?.data();
+              Map<String, dynamic>? data = snapshot.data?.data() as Map<String, dynamic>?;
               return Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -132,7 +133,8 @@ class MarqueeText extends StatelessWidget {
                           // print("The twitter username is @${data?['twitter']}");
                           // print("The title is ${data?['title']}");
                           SocialShare.shareTwitter(
-                              "Hey, download Green Sun Diary application on PlayStore and check out today's mental health article by @dan about @title }",
+                              "Hey, download Green Sun Diary application on PlayStore and check out "
+                                  "today's mental health article by @${data?['twitter']} about @${data?['title']} }",
                               hashtags: ["greensundiary"],
                               url: "");
                         },
