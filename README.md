@@ -1,6 +1,6 @@
 # Green Sun Diary
 
-This is a mental health oriented diary entry application, made to help people monitor their mental health progress from every activity that they pertake in.
+This is a diary app, done a little bit differently.
 
 This application helped me improve my understanding of flutter and the bloc pattern.
 Feel free to play with it. In case you have any improvements, a PR is welcome.
