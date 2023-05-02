@@ -1,11 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:greensundiary/authentication/auth_bloc/google/continue_with_google.dart';
-import 'package:greensundiary/authentication/auth_bloc/login/login_bloc.dart';
-import 'package:greensundiary/authentication/auth_bloc/login/login_provider.dart';
-import 'package:greensundiary/authentication/auth_bloc/login/reset_password/rp_bloc/rp_bloc.dart';
-import 'package:greensundiary/authentication/auth_bloc/login/reset_password/rp_bloc/rp_provider.dart';
+import 'auth_bloc/auth_bloc.dart';
 import 'package:greensundiary/constants.dart';
 import 'package:greensundiary/home/home_screen.dart';
 import 'package:greensundiary/logo/logo_switch.dart';

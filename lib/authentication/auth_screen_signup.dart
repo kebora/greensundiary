@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:greensundiary/authentication/auth_bloc/google/continue_with_google.dart';
-import 'package:greensundiary/authentication/auth_bloc/signup/signup_bloc.dart';
-import 'package:greensundiary/authentication/auth_bloc/signup/signup_provider.dart';
+import 'auth_bloc/auth_bloc.dart';
 import 'package:greensundiary/constants.dart';
 import 'package:greensundiary/logo/logo_switch.dart';
 import 'package:lottie/lottie.dart';
