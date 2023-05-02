@@ -23,18 +23,24 @@ class SignUpScreen extends StatelessWidget {
               Container(
                 child: LogoSwitch(),
               ),
-              _sizedBoxF(sizedBoxHeight),
+              _SizedBox(size: sizedBoxHeight),
               //email address
-              _inputEmailAddress(bloc),
-              _sizedBoxF(sizedBoxHeight),
+              _InputEmailAddress(
+                bloc: bloc,
+              ),
+              _SizedBox(size: sizedBoxHeight),
               //password
-              _inputPassword(bloc),
-              _sizedBoxF(sizedBoxHeight),
-              _inputConfirmPassword(bloc),
-              _sizedBoxF(5.0),
+              _InputPassword(
+                bloc: bloc,
+              ),
+              _SizedBox(size: sizedBoxHeight),
+              _InputConfirmPassword(
+                bloc: bloc,
+              ),
+              _SizedBox(size: sizedBoxHeight),
               //create account button
               _SignUpButton(context: context, bloc: bloc),
-              _sizedBoxF(3.0),
+              _SizedBox(size: sizedBoxHeight),
               //Forgot password
               _GoogleAccount(context: context, bloc: bloc),
             ],
@@ -46,76 +52,91 @@ class SignUpScreen extends StatelessWidget {
 }
 
 //input email address
-Widget _inputEmailAddress(SignUpBloc bloc) {
-  return StreamBuilder<Object>(
-      stream: bloc.email,
-      builder: (context, snapshot) {
-        return TextField(
-          onChanged: bloc.changeEmail,
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            errorText: snapshot.error.toString(),
-            filled: true,
-            hintText: "Email",
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-          ),
-        );
-      });
+class _InputEmailAddress extends StatelessWidget {
+  const _InputEmailAddress({Key? key, required this.bloc}) : super(key: key);
+  final SignUpBloc bloc;
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<Object>(
+        stream: bloc.email,
+        builder: (context, snapshot) {
+          return TextField(
+            onChanged: bloc.changeEmail,
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              filled: true,
+              hintText: "Email",
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              disabledBorder: InputBorder.none,
+            ),
+          );
+        });
+  }
 }
 
 //input password
-Widget _inputPassword(SignUpBloc bloc) {
-  return StreamBuilder<Object>(
-      stream: bloc.password,
-      builder: (context, snapshot) {
-        return TextField(
-          onChanged: bloc.changePassword,
-          obscureText: true,
-          decoration: InputDecoration(
-            errorText: snapshot.error.toString(),
-            filled: true,
-            hintText: "Password",
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-          ),
-        );
-      });
+class _InputPassword extends StatelessWidget {
+  const _InputPassword({Key? key, required this.bloc}) : super(key: key);
+  final SignUpBloc bloc;
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<Object>(
+        stream: bloc.password,
+        builder: (context, snapshot) {
+          return TextField(
+            onChanged: bloc.changePassword,
+            obscureText: true,
+            decoration: InputDecoration(
+              filled: true,
+              hintText: "Password",
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              disabledBorder: InputBorder.none,
+            ),
+          );
+        });
+  }
 }
 
-//input password
-Widget _inputConfirmPassword(SignUpBloc bloc) {
-  return StreamBuilder<Object>(
-      stream: bloc.confirmPassword,
-      builder: (context, snapshot) {
-        return TextField(
-          onChanged: bloc.changeConfirmPassword,
-          obscureText: true,
-          decoration: InputDecoration(
-            errorText: snapshot.error.toString(),
-            filled: true,
-            hintText: "Confirm Password",
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-          ),
-        );
-      });
+class _InputConfirmPassword extends StatelessWidget {
+  const _InputConfirmPassword({Key? key, required this.bloc}) : super(key: key);
+  final SignUpBloc bloc;
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<Object>(
+        stream: bloc.confirmPassword,
+        builder: (context, snapshot) {
+          return TextField(
+            onChanged: bloc.changeConfirmPassword,
+            obscureText: true,
+            decoration: InputDecoration(
+              filled: true,
+              hintText: "Confirm Password",
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              disabledBorder: InputBorder.none,
+            ),
+          );
+        });
+  }
 }
 
-//define the space between the widgets in the card
-Widget _sizedBoxF(size) {
-  return SizedBox(
-    height: size,
-  );
+class _SizedBox extends StatelessWidget {
+  const _SizedBox({Key? key, required this.size}) : super(key: key);
+  final size;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: size,
+    );
+  }
 }
 
 //Define the signUp button

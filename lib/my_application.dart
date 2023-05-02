@@ -24,15 +24,11 @@ class MyApplication extends StatelessWidget {
             title: 'greensundiary',
             // Calling the authentication screen
             home: Scaffold(
-              body: Stack(
-                children: [
-                  Center(
-                    child: BlocBuilder<SwitchCubit, bool>(
-                      builder: (_, state) =>
-                          state == false ? LoginScreen() : SignUpScreen(),
-                    ),
-                  ),
-                ],
+              body: Center(
+                child: BlocBuilder<SwitchCubit, bool>(
+                  builder: (_, state) =>
+                      state == false ? LoginScreen() : SignUpScreen(),
+                ),
               ),
             ),
           ),

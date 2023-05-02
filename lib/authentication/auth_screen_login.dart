@@ -26,16 +26,19 @@ class LoginScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                color: Colors.green.shade50,
                 child: LogoSwitch(),
               ),
-              _sizedBoxF(sizedBoxHeight),
+              _SizedBox(size: sizedBoxHeight),
               //email address
-              _inputEmailAddress(bloc),
-              _sizedBoxF(sizedBoxHeight),
+              _InputEmailAddress(
+                bloc: bloc,
+              ),
+              _SizedBox(size: sizedBoxHeight),
               //password
-              _inputPassword(bloc),
-              _sizedBoxF(sizedBoxHeight),
+              _InputPassword(
+                bloc: bloc,
+              ),
+              _SizedBox(size: sizedBoxHeight),
               //login button
               _LoginButton(context: context, bloc: bloc),
               //Forgot password
@@ -49,53 +52,65 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-//input email address
-Widget _inputEmailAddress(LoginBloc bloc) {
-  return StreamBuilder<Object>(
-      stream: bloc.email,
-      builder: (context, snapshot) {
-        return TextField(
-          onChanged: bloc.changeEmail,
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            filled: true,
-            hintText: "Email",
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-          ),
-        );
-      });
+class _InputEmailAddress extends StatelessWidget {
+  const _InputEmailAddress({Key? key, required this.bloc}) : super(key: key);
+  final LoginBloc bloc;
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<Object>(
+        stream: bloc.email,
+        builder: (context, snapshot) {
+          return TextField(
+            onChanged: bloc.changeEmail,
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              filled: true,
+              hintText: "Email",
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              disabledBorder: InputBorder.none,
+            ),
+          );
+        });
+  }
 }
 
-//input password
-Widget _inputPassword(LoginBloc bloc) {
-  return StreamBuilder<Object>(
-      stream: bloc.password,
-      builder: (context, snapshot) {
-        return TextField(
-          onChanged: bloc.changePassword,
-          obscureText: true,
-          decoration: InputDecoration(
-            filled: true,
-            hintText: "Password",
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-          ),
-        );
-      });
+class _InputPassword extends StatelessWidget {
+  const _InputPassword({Key? key, required this.bloc}) : super(key: key);
+  final LoginBloc bloc;
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<Object>(
+        stream: bloc.password,
+        builder: (context, snapshot) {
+          return TextField(
+            onChanged: bloc.changePassword,
+            obscureText: true,
+            decoration: InputDecoration(
+              filled: true,
+              hintText: "Password",
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              disabledBorder: InputBorder.none,
+            ),
+          );
+        });
+  }
 }
 
-//define the space between the widgets in the card
-Widget _sizedBoxF(size) {
-  return SizedBox(
-    height: size,
-  );
+class _SizedBox extends StatelessWidget {
+  const _SizedBox({Key? key, required this.size}) : super(key: key);
+  final size;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: size,
+    );
+  }
 }
 
 //Define the login button
