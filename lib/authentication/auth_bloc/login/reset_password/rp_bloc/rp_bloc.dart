@@ -20,7 +20,7 @@ class RPBloc extends Object with RPValidators {
   submit(BuildContext context) async {
     final validEmail = _email.value;
     //check if user already exists in the database before sending a reset link.
-    await _auth.sendPasswordResetEmail(email: validEmail!).whenComplete(() {
+    await _auth.sendPasswordResetEmail(email: validEmail).whenComplete(() {
       FocusScope.of(context).unfocus();
       Navigator.of(context).pop();
       return ScaffoldMessenger.of(context).showSnackBar(

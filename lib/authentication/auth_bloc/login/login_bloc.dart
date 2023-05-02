@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:greensundiary/home/home_screen.dart';
 import 'package:rxdart/rxdart.dart';
@@ -7,9 +6,6 @@ import 'package:rxdart/rxdart.dart';
 import 'login_validators.dart';
 
 class LoginBloc extends Object with LoginValidators {
-  // database configurations
-  final _auth = FirebaseAuth.instance;
-  late UserCredential _userCredential;
   //
   final _email = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
@@ -31,7 +27,7 @@ class LoginBloc extends Object with LoginValidators {
     final validPassword = _password.value;
     //call the signIn function and pass the valid values.
     signIn(
-        context: context, userEmail: validEmail!, userPassword: validPassword!);
+        context: context, userEmail: validEmail, userPassword: validPassword);
     print('Email is $validEmail and password is $validPassword');
   }
 
@@ -42,10 +38,10 @@ class LoginBloc extends Object with LoginValidators {
 
   //signIn function
   Future<void> signIn(
-      {required BuildContext context, required String userEmail, required String userPassword}) async {
+      {required BuildContext context,
+      required String userEmail,
+      required String userPassword}) async {
     try {
-      _userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: userEmail, password: userPassword);
       User? user = FirebaseAuth.instance.currentUser;
       if (user!.emailVerified) {
         //If I choose to send a verification link again,

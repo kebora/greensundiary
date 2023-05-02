@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marquee/marquee.dart';
@@ -50,7 +49,8 @@ class ArticleScreen extends StatelessWidget {
                           }
                           if (snapshot.connectionState ==
                               ConnectionState.done) {
-                            Map<String, dynamic>? data = snapshot.data!.data() as Map<String, dynamic>?;
+                            Map<String, dynamic>? data =
+                                snapshot.data!.data() as Map<String, dynamic>?;
                             return Column(
                               children: [
                                 Row(
@@ -114,7 +114,8 @@ class MarqueeText extends StatelessWidget {
               return Text("Document does not exist");
             }
             if (snapshot.connectionState == ConnectionState.done) {
-              Map<String, dynamic>? data = snapshot.data!.data() as Map<String, dynamic>?;
+              Map<String, dynamic>? data =
+                  snapshot.data!.data() as Map<String, dynamic>?;
               return Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

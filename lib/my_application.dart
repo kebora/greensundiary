@@ -4,16 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:greensundiary/authentication/auth_bloc/login/login_provider.dart';
 import 'package:greensundiary/authentication/auth_bloc/login/reset_password/rp_bloc/rp_provider.dart';
 import 'package:greensundiary/authentication/auth_bloc/logo_bloc/logo_movement_bloc.dart';
-import 'package:greensundiary/authentication/auth_bloc/logo_bloc/logo_movement_state.dart';
 import 'package:greensundiary/authentication/auth_bloc/signup/signup_provider.dart';
 import 'package:greensundiary/authentication/auth_screen_login.dart';
 import 'package:greensundiary/authentication/auth_screen_signup.dart';
-import 'package:greensundiary/background/auth_background.dart';
 
 class MyApplication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //todo:try to remove this and look at the behavior.
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -30,9 +27,9 @@ class MyApplication extends StatelessWidget {
               body: Stack(
                 children: [
                   Center(
-                    child: BlocBuilder<MyBloc, MyState>(
+                    child: BlocBuilder<SwitchCubit, bool>(
                       builder: (_, state) =>
-                          state is StateA ? LoginScreen() : SignUpScreen(),
+                          state == false ? LoginScreen() : SignUpScreen(),
                     ),
                   ),
                 ],

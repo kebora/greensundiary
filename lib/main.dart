@@ -45,7 +45,7 @@ class _MyAppLogicStarts extends StatelessWidget {
             ///if no user, authenticate!
             else {
               return BlocProvider(
-                create: (content) => MyBloc(),
+                create: (content) => SwitchCubit(),
                 child: MyApplication(),
               );
             }

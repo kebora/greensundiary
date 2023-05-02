@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:greensundiary/diary/bloc/bloc.dart';
 import 'package:intl/intl.dart';
@@ -196,7 +194,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                   ),
                 ),
                 secondary: Icon(
-                  FontAwesomeIcons.smileBeam,
+                  FontAwesomeIcons.circle,
                   color: Colors.green,
                 ),
                 value: Mood.greenSun,
@@ -214,7 +212,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                   ),
                 ),
                 secondary: Icon(
-                  FontAwesomeIcons.smile,
+                  FontAwesomeIcons.faceSmile,
                   color: Colors.blue,
                 ),
                 value: Mood.blueSun,
@@ -232,7 +230,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                   ),
                 ),
                 secondary: Icon(
-                  FontAwesomeIcons.frown,
+                  FontAwesomeIcons.circle,
                   color: Colors.red,
                 ),
                 value: Mood.redSun,
@@ -256,7 +254,11 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
 
 ///submit the details
 class _SubmitDetails extends StatelessWidget {
-  _SubmitDetails({required this.bloc,required this.context,required this.selectedDate,required this.mood});
+  _SubmitDetails(
+      {required this.bloc,
+      required this.context,
+      required this.selectedDate,
+      required this.mood});
   final Bloc bloc;
   final BuildContext context;
   final String selectedDate;
@@ -269,7 +271,7 @@ class _SubmitDetails extends StatelessWidget {
           stream: bloc.submitValid,
           builder: (context, snapshot) {
             return OutlinedButton.icon(
-              icon: Icon(FontAwesomeIcons.bookReader),
+              icon: Icon(FontAwesomeIcons.book),
               label: Text("Save Diary"),
               onPressed: snapshot.hasData ? function1 : null,
               style: ElevatedButton.styleFrom(

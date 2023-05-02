@@ -4,7 +4,6 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:greensundiary/constants.dart';
 import 'package:greensundiary/diary/add_diary_screen.dart';
 import 'package:greensundiary/diary/article_screen.dart';
 import 'package:greensundiary/diary/chart.dart';
@@ -43,7 +42,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ///todo: obtain username from email.
     String firstName = user.displayName.toString();
-    int firstIndex = firstName.indexOf(' ') ?? 0;
+    int firstIndex = firstName.indexOf(' ');
     firstName = firstName.substring(0, firstIndex);
 
     return Scaffold(
@@ -167,7 +166,7 @@ class ChartAndShare extends StatelessWidget {
                       iconSize: 25,
                     ),
                     IconButton(
-                      icon: Icon(FontAwesomeIcons.featherAlt),
+                      icon: Icon(FontAwesomeIcons.pen),
                       onPressed: () {
                         Navigator.of(context).push(
                             MaterialPageRoute(builder: (BuildContext context) {

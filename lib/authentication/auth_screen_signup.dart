@@ -221,6 +221,7 @@ class _GoogleAccountButton extends StatelessWidget {
 
   //func 2
   void function2(context, bloc) async {
+    // ignore: unused_local_variable
     User? user = await Authentication.signInWithGoogle(context: context);
     //If a user is found then we can pass the data to the HomeScreen.
   }

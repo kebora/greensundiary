@@ -37,7 +37,7 @@ class Bloc extends Object with Validators {
     ///I do this by checking whether there exists any record in the db.
     await getDoc();
     await submitDetailsToDB(
-        context, selectedDate, mood, validTitleText!, validBodyText!);
+        context, selectedDate, mood, validTitleText, validBodyText);
   }
 
   Future getDoc() async {
@@ -77,7 +77,8 @@ class Bloc extends Object with Validators {
     String validTitleText,
     String validBodyText,
   ) async {
-    if (validTitleText != null && validBodyText != null) {
+    // ignore: unnecessary_null_comparison
+    if (validBodyText != null) {
       ///store the details in the database.
       await diaries.doc(user!.uid).collection("Diaries").doc().set({
         ///convert to date and see what happens.
