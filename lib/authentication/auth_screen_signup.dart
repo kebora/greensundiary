@@ -50,22 +50,18 @@ Widget _inputEmailAddress(SignUpBloc bloc) {
   return StreamBuilder<Object>(
       stream: bloc.email,
       builder: (context, snapshot) {
-        return Padding(
-          padding: const EdgeInsets.only(right: 16.0, left: 3.0),
-          child: TextField(
-            onChanged: bloc.changeEmail,
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-              errorText: snapshot.error,
-              filled: true,
-              hintText: "Email",
-              icon: Icon(Icons.person_outline),
-              border: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              errorBorder: InputBorder.none,
-              disabledBorder: InputBorder.none,
-            ),
+        return TextField(
+          onChanged: bloc.changeEmail,
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+            errorText: snapshot.error.toString(),
+            filled: true,
+            hintText: "Email",
+            border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
           ),
         );
       });
@@ -76,22 +72,18 @@ Widget _inputPassword(SignUpBloc bloc) {
   return StreamBuilder<Object>(
       stream: bloc.password,
       builder: (context, snapshot) {
-        return Padding(
-          padding: const EdgeInsets.only(right: 16.0, left: 3.0),
-          child: TextField(
-            onChanged: bloc.changePassword,
-            obscureText: true,
-            decoration: InputDecoration(
-              errorText: snapshot.error,
-              filled: true,
-              hintText: "Password",
-              icon: Icon(Icons.security_outlined),
-              border: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              errorBorder: InputBorder.none,
-              disabledBorder: InputBorder.none,
-            ),
+        return TextField(
+          onChanged: bloc.changePassword,
+          obscureText: true,
+          decoration: InputDecoration(
+            errorText: snapshot.error.toString(),
+            filled: true,
+            hintText: "Password",
+            border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
           ),
         );
       });
@@ -102,22 +94,18 @@ Widget _inputConfirmPassword(SignUpBloc bloc) {
   return StreamBuilder<Object>(
       stream: bloc.confirmPassword,
       builder: (context, snapshot) {
-        return Padding(
-          padding: const EdgeInsets.only(right: 16.0, left: 3.0),
-          child: TextField(
-            onChanged: bloc.changeConfirmPassword,
-            obscureText: true,
-            decoration: InputDecoration(
-              errorText: snapshot.error,
-              filled: true,
-              hintText: "Confirm Password",
-              icon: Icon(FontAwesomeIcons.lock),
-              border: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              errorBorder: InputBorder.none,
-              disabledBorder: InputBorder.none,
-            ),
+        return TextField(
+          onChanged: bloc.changeConfirmPassword,
+          obscureText: true,
+          decoration: InputDecoration(
+            errorText: snapshot.error.toString(),
+            filled: true,
+            hintText: "Confirm Password",
+            border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
           ),
         );
       });
@@ -132,7 +120,7 @@ Widget _sizedBoxF(size) {
 
 //Define the signUp button
 class _SignUpButton extends StatefulWidget {
-  _SignUpButton({this.context, this.bloc});
+  _SignUpButton({required this.context, required this.bloc});
   final BuildContext context;
   final SignUpBloc bloc;
   final isLoading = false;
@@ -179,7 +167,7 @@ class __SignUpButtonState extends State<_SignUpButton> {
 
 //create a new account
 class _GoogleAccount extends StatelessWidget {
-  _GoogleAccount({this.context, this.bloc});
+  _GoogleAccount({required this.context, required this.bloc});
   final BuildContext context;
   final SignUpBloc bloc;
 
@@ -202,7 +190,7 @@ class _GoogleAccount extends StatelessWidget {
 
 //Google Account Button
 class _GoogleAccountButton extends StatelessWidget {
-  _GoogleAccountButton({this.context, this.bloc});
+  _GoogleAccountButton({required this.context, required this.bloc});
   final BuildContext context;
   final SignUpBloc bloc;
   @override
@@ -233,7 +221,7 @@ class _GoogleAccountButton extends StatelessWidget {
 
   //func 2
   void function2(context, bloc) async {
-    User user = await Authentication.signInWithGoogle(context: context);
+    User? user = await Authentication.signInWithGoogle(context: context);
     //If a user is found then we can pass the data to the HomeScreen.
   }
 }

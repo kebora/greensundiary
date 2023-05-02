@@ -13,7 +13,7 @@ import 'package:greensundiary/main.dart';
 import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({this.user});
+  HomeScreen({required this.user});
   final User user;
 
   /// Logout dialog
@@ -56,14 +56,14 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.green,
               ),
               onPressed: () {
-                return showDialog(
-                    context: context,
-                    builder: (_) {
-                      return AlertDialog(
-                        title: Text("Account Management"),
-                        content: Text(accountDeactivation),
-                      );
-                    });
+                // return showDialog(
+                //     context: context,
+                //     builder: (_) {
+                //       AlertDialog(
+                //         title: Text("Account Management"),
+                //         content: Text(accountDeactivation),
+                //       );
+                //     });
               })
         ],
         backgroundColor: Colors.transparent,

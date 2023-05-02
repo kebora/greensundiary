@@ -17,7 +17,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
   DateTime selectedDate = DateTime.now();
 
   _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate, // Refer step 1
       firstDate: DateTime(2000),
@@ -145,7 +145,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                           icon: Icon(
                             FontAwesomeIcons.bookmark,
                           ),
-                          errorText: snapshot.error),
+                          errorText: snapshot.error.toString()),
                       maxLength: 50,
                     );
                   }),
@@ -164,7 +164,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                         // icon: Icon(FontAwesomeIcons.penNib),
                         hintText: 'What happened...',
                         border: OutlineInputBorder(),
-                        errorText: snapshot.error,
+                        errorText: snapshot.error.toString(),
                       ),
                       minLines: 1,
                       maxLines: 10,
@@ -201,9 +201,9 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                 ),
                 value: Mood.greenSun,
                 groupValue: mood,
-                onChanged: (Mood value) {
+                onChanged: (value) {
                   setState(() {
-                    mood = value;
+                    mood = value as Mood;
                   });
                 }),
             RadioListTile(
@@ -219,9 +219,9 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                 ),
                 value: Mood.blueSun,
                 groupValue: mood,
-                onChanged: (Mood value) {
+                onChanged: (value) {
                   setState(() {
-                    mood = value;
+                    mood = value as Mood;
                   });
                 }),
             RadioListTile(
@@ -237,9 +237,9 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                 ),
                 value: Mood.redSun,
                 groupValue: mood,
-                onChanged: (Mood value) {
+                onChanged: (value) {
                   setState(() {
-                    mood = value;
+                    mood = value as Mood;
                   });
                 }),
             Divider(
@@ -256,7 +256,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
 
 ///submit the details
 class _SubmitDetails extends StatelessWidget {
-  _SubmitDetails({this.bloc, this.context, this.selectedDate, this.mood});
+  _SubmitDetails({required this.bloc,required this.context,required this.selectedDate,required this.mood});
   final Bloc bloc;
   final BuildContext context;
   final String selectedDate;

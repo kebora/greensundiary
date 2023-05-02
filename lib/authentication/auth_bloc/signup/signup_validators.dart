@@ -1,7 +1,7 @@
 import 'dart:async';
 
 class SignUpValidators {
-  int numOfCharacters;
+  late int numOfCharacters;
   //regex for email
   static final RegExp _emailRegExp = RegExp(
     r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',

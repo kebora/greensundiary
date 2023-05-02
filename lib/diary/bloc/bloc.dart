@@ -6,7 +6,7 @@ import 'package:greensundiary/diary/view_created_diaries.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Bloc extends Object with Validators {
-  User user = FirebaseAuth.instance.currentUser;
+  User? user = FirebaseAuth.instance.currentUser;
 
   ///reference of the diaries
   CollectionReference diaries =
@@ -37,13 +37,13 @@ class Bloc extends Object with Validators {
     ///I do this by checking whether there exists any record in the db.
     await getDoc();
     await submitDetailsToDB(
-        context, selectedDate, mood, validTitleText, validBodyText);
+        context, selectedDate, mood, validTitleText!, validBodyText!);
   }
 
   Future getDoc() async {
     var a = await FirebaseFirestore.instance
         .collection('moods')
-        .doc(user.uid)
+        .doc(user!.uid)
         .get();
     if (a.exists) {
       print('Exists');
@@ -55,7 +55,7 @@ class Bloc extends Object with Validators {
       print('Not exists');
 
       ///create a new collection and initialize all moods to zero.
-      await FirebaseFirestore.instance.collection('moods').doc(user.uid).set({
+      await FirebaseFirestore.instance.collection('moods').doc(user!.uid).set({
         'greenSun': 0,
         'blueSun': 0,
         'redSun': 0,
@@ -65,7 +65,7 @@ class Bloc extends Object with Validators {
 
   ///This function updates the records of the mood.
   updateMoodRecords(BuildContext context, String fieldToUpdate) async {
-    await moods.doc(user.uid).update({
+    await moods.doc(user!.uid).update({
       fieldToUpdate: FieldValue.increment(1),
     });
   }
@@ -79,13 +79,13 @@ class Bloc extends Object with Validators {
   ) async {
     if (validTitleText != null && validBodyText != null) {
       ///store the details in the database.
-      await diaries.doc(user.uid).collection("Diaries").doc().set({
+      await diaries.doc(user!.uid).collection("Diaries").doc().set({
         ///convert to date and see what happens.
         'dateCreated': selectedDate,
         'title': validTitleText,
         'body': validBodyText,
         'mood': mood,
-        'email': user.email,
+        'email': user!.email,
       }).whenComplete(() async {
         Navigator.of(context).pop();
 
@@ -103,7 +103,7 @@ class Bloc extends Object with Validators {
             .push(MaterialPageRoute(builder: (BuildContext context) {
           return ViewCreatedDiaries();
         }));
-        return ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("Diary added successfully"),
             backgroundColor: Colors.green,

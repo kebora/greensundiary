@@ -45,12 +45,12 @@ class ArticleScreen extends StatelessWidget {
                           ///todo: in this section, I will have to add a nicer placeholder,
                           /// like an interactive cat in a box. and a redirect button to create
                           /// new diary.
-                          if (snapshot.hasData && !snapshot.data.exists) {
+                          if (snapshot.hasData && !snapshot.data!.exists) {
                             return Text("Document does not exist");
                           }
                           if (snapshot.connectionState ==
                               ConnectionState.done) {
-                            Map<String, dynamic> data = snapshot.data.data();
+                            Map<String, dynamic>? data = snapshot.data!.data() as Map<String, dynamic>?;
                             return Column(
                               children: [
                                 Row(
@@ -58,7 +58,7 @@ class ArticleScreen extends StatelessWidget {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        data['title'],
+                                        data?['title'],
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                         textScaleFactor: 1.5,
@@ -67,15 +67,15 @@ class ArticleScreen extends StatelessWidget {
                                   ],
                                 ),
                                 Text(
-                                  data['body'],
+                                  data?['body'],
                                   textScaleFactor: 1.3,
                                 ),
                                 Text(
-                                  data['writer'],
+                                  data?['writer'],
                                   textScaleFactor: 1.5,
                                 ),
                                 Text(
-                                  data['email'],
+                                  data?['email'],
                                   textScaleFactor: 1.3,
                                 ),
                               ],
@@ -110,11 +110,11 @@ class MarqueeText extends StatelessWidget {
             if (snapshot.hasError) {
               return Text("Something went wrong!");
             }
-            if (snapshot.hasData && !snapshot.data.exists) {
+            if (snapshot.hasData && !snapshot.data!.exists) {
               return Text("Document does not exist");
             }
             if (snapshot.connectionState == ConnectionState.done) {
-              Map<String, dynamic> data = snapshot.data.data();
+              Map<String, dynamic>? data = snapshot.data!.data() as Map<String, dynamic>?;
               return Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -128,10 +128,10 @@ class MarqueeText extends StatelessWidget {
                           size: 30,
                         ),
                         onPressed: () {
-                          print("The twitter username is @${data['twitter']}");
-                          print("The title is ${data['title']}");
+                          print("The twitter username is @${data?['twitter']}");
+                          print("The title is ${data?['title']}");
                           SocialShare.shareTwitter(
-                              "Hey, download Green Sun Diary application on PlayStore and check out today's mental health article by @${data['twitter']} about ${data['title']}",
+                              "Hey, download Green Sun Diary application on PlayStore and check out today's mental health article by @${data?['twitter']} about ${data?['title']}",
                               hashtags: ["greensundiary"],
                               url: "");
                         },
@@ -147,7 +147,7 @@ class MarqueeText extends StatelessWidget {
                         iconSize: 30,
                         onPressed: () {
                           SocialShare.shareWhatsapp(
-                              "Hey, download Green Sun Diary application on PlayStore and check out today's mental health article by ${data['writer']} about ${data['title']}");
+                              "Hey, download Green Sun Diary application on PlayStore and check out today's mental health article by ${data?['writer']} about ${data?['title']}");
                         },
                       ),
                     ],
@@ -161,7 +161,7 @@ class MarqueeText extends StatelessWidget {
                     child: Center(
                       child: Marquee(
                         text:
-                            "Green Sun Diary ${DateTime.now().year} : ${data['marquee']} ",
+                            "Green Sun Diary ${DateTime.now().year} : ${data?['marquee']} ",
                         velocity: 40,
                         textScaleFactor: 1.3,
                         style: TextStyle(

@@ -1,4 +1,3 @@
-import 'package:automate_alert/automate_alert.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,7 +16,7 @@ class ViewCreatedDiaries extends StatefulWidget {
 
 class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
   Categories _currentView = Categories.allView;
-  User user = FirebaseAuth.instance.currentUser;
+  User? user = FirebaseAuth.instance.currentUser;
 
   ///the popUp function that allows filtration.
   Widget _changeQueryDialog(BuildContext context) {
@@ -86,7 +85,7 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
     Future<void> _deleteDiary(String id) {
       return FirebaseFirestore.instance
           .collection("diaries")
-          .doc(user.uid)
+          .doc(user!.uid)
           .collection("Diaries")
           .doc(id)
           .delete()
@@ -98,7 +97,7 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
     ///getting all the data back.
     Stream documentStream = FirebaseFirestore.instance
         .collection("diaries")
-        .doc(user.uid)
+        .doc(user!.uid)
         .collection("Diaries")
         .orderBy('dateCreated', descending: true)
         .snapshots();
@@ -106,7 +105,7 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
     ///get only the greens
     Stream greenStream = FirebaseFirestore.instance
         .collection("diaries")
-        .doc(user.uid)
+        .doc(user!.uid)
         .collection("Diaries")
         .where('mood', isEqualTo: "Mood.greenSun")
         .snapshots();
@@ -114,7 +113,7 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
     ///get only the blues
     Stream blueStream = FirebaseFirestore.instance
         .collection("diaries")
-        .doc(user.uid)
+        .doc(user!.uid)
         .collection("Diaries")
         .where('mood', isEqualTo: "Mood.blueSun")
         .snapshots();
@@ -122,7 +121,7 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
     ///get only the reds
     Stream redStream = FirebaseFirestore.instance
         .collection("diaries")
-        .doc(user.uid)
+        .doc(user!.uid)
         .collection("Diaries")
         .where('mood', isEqualTo: "Mood.redSun")
         .snapshots();
@@ -158,7 +157,7 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
-            child: StreamBuilder<QuerySnapshot>(
+            child: StreamBuilder<dynamic>(
                 stream: _currentView == Categories.onlyRed
                     ? redStream
                     : _currentView == Categories.onlyBlue
@@ -181,13 +180,13 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                         shrinkWrap: true,
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (context, index) {
-                          DocumentSnapshot document = snapshot.data.docs[index];
+                          dynamic document = snapshot.data.docs[index];
                           return Card(
                             child: Column(
                               children: [
                                 ListTile(
                                   title: Text(
-                                    document.data()['dateCreated'],
+                                    document.data()?['dateCreated'],
                                     style: TextStyle(),
                                     textScaleFactor: 1.5,
                                   ),
@@ -197,7 +196,7 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                             builder: (BuildContext context) {
                                       return ReadDiaryScreen(
                                         diaryId: document.id,
-                                        userID: user.uid,
+                                        userID: user!.uid,
                                       );
                                     }));
                                   },
@@ -208,10 +207,10 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    backgroundColor: document.data()['mood'] ==
+                                    backgroundColor: document.data()?['mood'] ==
                                             "Mood.blueSun"
                                         ? Colors.blue
-                                        : document.data()['mood'] ==
+                                        : document.data()?['mood'] ==
                                                 "Mood.greenSun"
                                             ? Colors.green
                                             : Colors.red,
@@ -228,15 +227,15 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                           animType:
                                               CoolAlertAnimType.slideInRight,
                                           text:
-                                              "Confirm you want to delete ${document.data()['title']}?",
+                                              "Confirm you want to delete ${document.data()?['title']}?",
                                           confirmBtnText: "Delete",
                                           cancelBtnText: "Cancel",
                                           borderRadius: 5,
                                           confirmBtnColor:
-                                              document.data()['mood'] ==
+                                              document.data()?['mood'] ==
                                                       "Mood.blueSun"
                                                   ? Colors.blue
-                                                  : document.data()['mood'] ==
+                                                  : document.data()?['mood'] ==
                                                           "Mood.greenSun"
                                                       ? Colors.green
                                                       : Colors.red,
@@ -245,16 +244,16 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                                 .then((value) {
                                               Navigator.of(context).pop();
                                             }).whenComplete(() {
-                                              return AlertNoServerAutoDialog(
-                                                  context: context,
-                                                  alertAnimateType:
-                                                      AlertAnimateType
-                                                          .SlowAppear,
-                                                  message:
-                                                      "Diary record deleted successfully!",
-                                                  alertType: AlertType.Success,
-                                                  showDuration: 2)
-                                                ..show();
+                                              // return AlertNoServerAutoDialog(
+                                              //     context: context,
+                                              //     alertAnimateType:
+                                              //         AlertAnimateType
+                                              //             .SlowAppear,
+                                              //     message:
+                                              //         "Diary record deleted successfully!",
+                                              //     alertType: AlertType.Success,
+                                              //     showDuration: 2)
+                                              //   ..show();
                                             });
                                           });
 
@@ -262,7 +261,7 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                     },
                                   ),
                                   subtitle: Text(
-                                    document.data()['title'],
+                                    document.data()?['title'],
                                     textScaleFactor: 1.5,
                                   ),
                                   // horizontalTitleGap: 10,

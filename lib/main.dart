@@ -31,10 +31,10 @@ class _MyAppLogicStarts extends StatelessWidget {
         future: Authentication.initializeFirebase(context),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            User user = FirebaseAuth.instance.currentUser;
+            User? user = FirebaseAuth.instance.currentUser;
             if (user != null) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
-                return Navigator.of(context).pushReplacement(
+                Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => HomeScreen(user: user),
                   ),
@@ -63,7 +63,7 @@ class _MyAppLogicStarts extends StatelessWidget {
 }
 
 class _Message extends StatelessWidget {
-  const _Message({Key key, this.myText}) : super(key: key);
+  const _Message({Key? key, required this.myText}) : super(key: key);
   final String myText;
 
   @override
@@ -73,10 +73,10 @@ class _Message extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              "assets/images/background/playstore.png",
-              height: 100,
-            ),
+            // Image.asset(
+            //   "assets/images/background/playstore.png",
+            //   height: 100,
+            // ),
             Text(myText),
           ],
         ),

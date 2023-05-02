@@ -29,7 +29,6 @@ class MyApplication extends StatelessWidget {
             home: Scaffold(
               body: Stack(
                 children: [
-                  AuthBackground(),
                   Center(
                     child: BlocBuilder<MyBloc, MyState>(
                       builder: (_, state) =>

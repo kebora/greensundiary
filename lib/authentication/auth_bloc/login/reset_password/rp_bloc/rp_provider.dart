@@ -4,11 +4,11 @@ import 'package:greensundiary/authentication/auth_bloc/login/reset_password/rp_b
 class RPProvider extends InheritedWidget {
   final bloc = RPBloc();
 
-  RPProvider({Key key, Widget child}) : super(key: key, child: child);
+  RPProvider({Key? key, required Widget child}) : super(key: key, child: child);
 
   bool updateShouldNotify(_) => true;
 
   static RPBloc of(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType<RPProvider>()).bloc;
+    return (context.dependOnInheritedWidgetOfExactType<RPProvider>())!.bloc;
   }
 }

@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                // color: Colors.lightBlue,
+                color: Colors.green.shade50,
                 child: LogoSwitch(),
               ),
               _sizedBoxF(sizedBoxHeight),
@@ -54,22 +54,17 @@ Widget _inputEmailAddress(LoginBloc bloc) {
   return StreamBuilder<Object>(
       stream: bloc.email,
       builder: (context, snapshot) {
-        return Padding(
-          padding: const EdgeInsets.only(right: 16.0, left: 3.0),
-          child: TextField(
-            onChanged: bloc.changeEmail,
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-              errorText: snapshot.error,
-              filled: true,
-              hintText: "Email",
-              icon: Icon(Icons.person_outline),
-              border: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              errorBorder: InputBorder.none,
-              disabledBorder: InputBorder.none,
-            ),
+        return TextField(
+          onChanged: bloc.changeEmail,
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+            filled: true,
+            hintText: "Email",
+            border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
           ),
         );
       });
@@ -80,22 +75,17 @@ Widget _inputPassword(LoginBloc bloc) {
   return StreamBuilder<Object>(
       stream: bloc.password,
       builder: (context, snapshot) {
-        return Padding(
-          padding: const EdgeInsets.only(right: 16.0, left: 3.0),
-          child: TextField(
-            onChanged: bloc.changePassword,
-            obscureText: true,
-            decoration: InputDecoration(
-              errorText: snapshot.error,
-              filled: true,
-              hintText: "Password",
-              icon: Icon(Icons.security_outlined),
-              border: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              errorBorder: InputBorder.none,
-              disabledBorder: InputBorder.none,
-            ),
+        return TextField(
+          onChanged: bloc.changePassword,
+          obscureText: true,
+          decoration: InputDecoration(
+            filled: true,
+            hintText: "Password",
+            border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
           ),
         );
       });
@@ -110,7 +100,7 @@ Widget _sizedBoxF(size) {
 
 //Define the login button
 class _LoginButton extends StatelessWidget {
-  _LoginButton({this.context, this.bloc});
+  _LoginButton({required this.context, required this.bloc});
   final BuildContext context;
   final LoginBloc bloc;
   @override
@@ -163,7 +153,7 @@ Widget _resetPassword(BuildContext context, RPBloc rpBloc) {
 //on pressing the forgot password option, show the modal bottom sheet
 //I am handling the reset password bloc here.
 class _SendPasswordLinkButton extends StatelessWidget {
-  _SendPasswordLinkButton({this.context, this.rpBloc});
+  _SendPasswordLinkButton({required this.context, required this.rpBloc});
   final BuildContext context;
   final RPBloc rpBloc;
   @override
@@ -218,7 +208,7 @@ _showIt(BuildContext inContext, RPBloc rpBloc) {
                         child: TextField(
                           onChanged: rpBloc.changeEmail,
                           decoration: InputDecoration(
-                            errorText: snapshot.error,
+                            errorText: snapshot.error.toString(),
                             filled: true,
                             hintText: "Enter Email address",
                             icon: Icon(Icons.mail_rounded),
@@ -249,7 +239,7 @@ _showIt(BuildContext inContext, RPBloc rpBloc) {
 
 //create a new account
 class _GoogleAccount extends StatelessWidget {
-  _GoogleAccount({this.context, this.bloc});
+  _GoogleAccount({required this.context, required this.bloc});
   final BuildContext context;
   final LoginBloc bloc;
 
@@ -272,7 +262,7 @@ class _GoogleAccount extends StatelessWidget {
 
 //Google Account Button
 class _GoogleAccountButton extends StatelessWidget {
-  _GoogleAccountButton({this.context, this.bloc});
+  _GoogleAccountButton({required this.context, required this.bloc});
   final BuildContext context;
   final LoginBloc bloc;
   @override
@@ -303,7 +293,7 @@ class _GoogleAccountButton extends StatelessWidget {
 
   //func 2
   void function2(context, bloc) async {
-    User user = await Authentication.signInWithGoogle(context: context);
+    User? user = await Authentication.signInWithGoogle(context: context);
 
     ///If a user is found then we can pass the data to the HomeScreen.
     if (user != null) {

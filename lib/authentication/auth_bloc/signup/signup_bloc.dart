@@ -7,7 +7,7 @@ import 'package:greensundiary/main.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SignUpBloc extends Object with SignUpValidators {
-  FirebaseAuth _firebaseAuth;
+  late FirebaseAuth _firebaseAuth;
   final _email = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
   final _confirmPassword = BehaviorSubject<String>();
@@ -40,7 +40,7 @@ class SignUpBloc extends Object with SignUpValidators {
       );
     } else {
       FocusScope.of(context).unfocus();
-      signUp(context, validEmail, validPassword);
+      signUp(context, validEmail!, validPassword!);
       print(
           'Email is $validEmail and password is $validPassword and confirmPass is $validConfirmPassword');
     }
@@ -60,11 +60,11 @@ class SignUpBloc extends Object with SignUpValidators {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: userEmail, password: userPassword);
       //send an email verification after creating an account
-      User user = FirebaseAuth.instance.currentUser;
-      await user.sendEmailVerification();
+      User? user = FirebaseAuth.instance.currentUser;
+      await user?.sendEmailVerification();
       //tell the user to check their email address for the verification link.
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        return ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
                 "Success! Check your email address for the verification link!"),

@@ -11,13 +11,13 @@ class Authentication {
   }
 
   //
-  static Future<User> signInWithGoogle({@required BuildContext context}) async {
+  static Future<User?> signInWithGoogle({required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
-    User user;
+    User? user;
 
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
-    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication =
@@ -61,7 +61,7 @@ class Authentication {
   }
 
   //
-  static SnackBar customSnackBar({@required String content}) {
+  static SnackBar customSnackBar({required String content}) {
     return SnackBar(
       backgroundColor: Colors.black,
       content: Text(
