@@ -161,7 +161,10 @@ class __SignUpButtonState extends State<_SignUpButton> {
           return ElevatedButton(
             onPressed: snapshot.hasData ? function1 : null,
             child: isLoading == false
-                ? Text("Create Account")
+                ? Text(
+                    "Create Account",
+                    style: TextStyle(fontFamily: "Montserrat"),
+                  )
                 : Lottie.asset('assets/images/triangleload.json', width: 50),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
@@ -214,23 +217,29 @@ class _GoogleAccountButton extends StatelessWidget {
   final SignUpBloc bloc;
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Object>(
-        stream: bloc.submitValid,
-        builder: (context, snapshot) {
-          return ElevatedButton.icon(
-            label: const Text(
-              'CONTINUE WITH GOOGLE',
-              style: TextStyle(color: Colors.white),
-            ),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
+    return SizedBox(
+      height: 45,
+      child: StreamBuilder<Object>(
+          stream: bloc.submitValid,
+          builder: (context, snapshot) {
+            return ElevatedButton.icon(
+              label: const Text(
+                'CONTINUE WITH GOOGLE',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "Montserrat",
+                ),
               ),
-            ),
-            icon: Icon(FontAwesomeIcons.google, color: Colors.white),
-            onPressed: snapshot.hasData ? null : function1,
-          );
-        });
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+              ),
+              icon: Icon(FontAwesomeIcons.google, color: Colors.white),
+              onPressed: snapshot.hasData ? null : function1,
+            );
+          }),
+    );
   }
 
   //func 1

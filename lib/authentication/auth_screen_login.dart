@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
               //login button
               _LoginButton(context: context, bloc: bloc),
               //Forgot password
-              _resetPassword(context, rpBloc),
+              _ResetPassword(rpBloc: rpBloc),
               _GoogleAccount(context: context, bloc: bloc),
             ],
           ),
@@ -121,7 +121,10 @@ class _LoginButton extends StatelessWidget {
         builder: (context, snapshot) {
           return ElevatedButton(
             onPressed: snapshot.hasData ? function1 : null,
-            child: Text("LogIn"),
+            child: Text(
+              "LogIn",
+              style: TextStyle(fontFamily: "Montserrat"),
+            ),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
@@ -147,18 +150,25 @@ class _LoginButton extends StatelessWidget {
   }
 }
 
-//Reset password link
-Widget _resetPassword(BuildContext context, RPBloc rpBloc) {
-  return Padding(
-    padding: const EdgeInsets.only(bottom: 8.0),
-    child: TextButton(
-      child: Text(
-        "Forgot Password?",
-        style: TextStyle(color: Colors.blue),
+class _ResetPassword extends StatelessWidget {
+  const _ResetPassword({Key? key, required this.rpBloc}) : super(key: key);
+  final RPBloc rpBloc;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: TextButton(
+        child: Text(
+          "Forgot Password?",
+          style: TextStyle(
+            color: Colors.blue,
+            fontFamily: "Montserrat",
+          ),
+        ),
+        onPressed: () => _showIt(context, rpBloc),
       ),
-      onPressed: () => _showIt(context, rpBloc),
-    ),
-  );
+    );
+  }
 }
 
 //on pressing the forgot password option, show the modal bottom sheet
@@ -174,7 +184,10 @@ class _SendPasswordLinkButton extends StatelessWidget {
         builder: (context, snapshot) {
           return ElevatedButton(
             onPressed: snapshot.hasData ? function1 : null,
-            child: Text("Send Reset Link"),
+            child: Text(
+              "Send Reset Link",
+              style: TextStyle(fontFamily: "Montserrat"),
+            ),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
@@ -214,21 +227,16 @@ _showIt(BuildContext inContext, RPBloc rpBloc) {
                 StreamBuilder<Object>(
                     stream: rpBloc.email,
                     builder: (context, snapshot) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 16.0, left: 3.0),
-                        child: TextField(
-                          onChanged: rpBloc.changeEmail,
-                          decoration: InputDecoration(
-                            errorText: snapshot.error.toString(),
-                            filled: true,
-                            hintText: "Enter Email address",
-                            icon: Icon(Icons.mail_rounded),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                          ),
+                      return TextField(
+                        onChanged: rpBloc.changeEmail,
+                        decoration: InputDecoration(
+                          filled: true,
+                          hintText: "Enter Email address",
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
                         ),
                       );
                     }),
@@ -237,7 +245,10 @@ _showIt(BuildContext inContext, RPBloc rpBloc) {
                   rpBloc: rpBloc,
                 ),
                 TextButton(
-                    child: Text("Cancel"),
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(fontFamily: "Montserrat"),
+                    ),
                     onPressed: () {
                       Navigator.of(inContext).pop();
                     }),
@@ -281,18 +292,21 @@ class _GoogleAccountButton extends StatelessWidget {
     return StreamBuilder<Object>(
         stream: bloc.submitValid,
         builder: (context, snapshot) {
-          return ElevatedButton.icon(
-            label: const Text(
-              'CONTINUE WITH GOOGLE',
-              style: TextStyle(color: Colors.white),
-            ),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
+          return SizedBox(
+            height: 45,
+            child: ElevatedButton.icon(
+              label: const Text(
+                'CONTINUE WITH GOOGLE',
+                style: TextStyle(color: Colors.white, fontFamily: "Montserrat"),
               ),
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+              ),
+              icon: Icon(FontAwesomeIcons.google, color: Colors.white),
+              onPressed: snapshot.hasData ? null : function1,
             ),
-            icon: Icon(FontAwesomeIcons.google, color: Colors.white),
-            onPressed: snapshot.hasData ? null : function1,
           );
         });
   }
