@@ -17,7 +17,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
   _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate, // Refer step 1
+      initialDate: selectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
       selectableDayPredicate: _decideWhichDayToEnable,
@@ -40,43 +40,20 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
   Widget build(BuildContext context) {
     final bloc = Bloc();
 
-    ///final selected and formatted date that I decide to send to DB.
+    ///final selected and formatted date to send to DB.
     String finalSelected = DateFormat.yMMMEd().format(selectedDate);
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: Icon(Icons.arrow_back),
-            color: Colors.green,
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.info_outline_rounded),
-            color: Colors.green,
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        ListTile(
-                          leading: new Icon(Icons.wb_twighlight),
-                          title: new Text(
-                              'It\'s okay not to be okay. No one is perfect!'),
-                        ),
-                      ],
-                    );
-                  });
-            },
-          ),
-        ],
+        // backgroundColor: Colors.green.shade200,
+        // leading: Builder(
+        //   builder: (context) => IconButton(
+        //     icon: Icon(Icons.arrow_back),
+        //     onPressed: () {
+        //       Navigator.of(context).pop();
+        //     },
+        //   ),
+        // ),
       ),
       bottomNavigationBar: _SubmitDetails(
         bloc: bloc,
@@ -86,7 +63,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -106,21 +83,23 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
 
   ///Date picker card
   Widget datePicker(BuildContext context, String finalSelected) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        GestureDetector(
-          child: Text(
-            "$finalSelected",
-            textScaleFactor: 1.5,
-            style: TextStyle(
-              color: Colors.green,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          onTap: () => _selectDate(context),
-        )
-      ],
+    return ListTile(
+      title: Text(
+        "$finalSelected",
+        textScaleFactor: 1.5,
+        style: TextStyle(
+          fontFamily: "Montserrat",
+          // fontWeight: FontWeight.bold,
+        ),
+      ),
+      subtitle: Text(
+        "Click to change date",
+        style: TextStyle(
+          color: Colors.green,
+          fontFamily: "Montserrat",
+        ),
+      ),
+      onTap: () => _selectDate(context),
     );
   }
 
@@ -128,125 +107,105 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
   Widget titleAndBody(Bloc bloc) {
     return Column(
       children: [
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: StreamBuilder<Object>(
-                  stream: bloc.titleText,
-                  builder: (context, snapshot) {
-                    return TextField(
-                      onChanged: bloc.changeTitleText,
-                      decoration: InputDecoration(
-                          hintText: 'Title',
-                          border: OutlineInputBorder(),
-                          icon: Icon(
-                            FontAwesomeIcons.bookmark,
-                          ),
-                          errorText: snapshot.error.toString()),
-                      maxLength: 50,
-                    );
-                  }),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: StreamBuilder<Object>(
-                  stream: bloc.bodyText,
-                  builder: (context, snapshot) {
-                    return TextField(
-                      onChanged: bloc.changeBodyText,
-                      decoration: InputDecoration(
-                        // icon: Icon(FontAwesomeIcons.penNib),
-                        hintText: 'What happened...',
-                        border: OutlineInputBorder(),
-                        errorText: snapshot.error.toString(),
-                      ),
-                      minLines: 1,
-                      maxLines: 10,
-                      maxLength: -1,
-                    );
-                  }),
-            ),
-          ],
+        StreamBuilder<Object>(
+            stream: bloc.titleText,
+            builder: (context, snapshot) {
+              return TextField(
+                style: TextStyle(fontFamily: "Montserrat", fontSize: 25),
+                onChanged: bloc.changeTitleText,
+                decoration: InputDecoration(
+                  hintText: 'Title',
+                ),
+                maxLength: 50,
+              );
+            }),
+        SizedBox(
+          height: 5,
         ),
+        StreamBuilder<Object>(
+            stream: bloc.bodyText,
+            builder: (context, snapshot) {
+              return TextField(
+                style: TextStyle(
+                  fontFamily: "Montserrat",
+                  fontSize: 25,
+                ),
+                onChanged: bloc.changeBodyText,
+                decoration: InputDecoration(
+                  // icon: Icon(FontAwesomeIcons.penNib),
+                  hintText: 'What happened...',
+                ),
+                minLines: 1,
+                maxLines: 10,
+                maxLength: -1,
+              );
+            }),
       ],
     );
   }
 
-  ///The mood card
+  ///The mood
   Widget moodCard(Bloc bloc) {
     return Column(
       children: [
-        Divider(
-          color: Colors.blueGrey,
-          thickness: 5,
-        ),
-        Column(
-          children: [
-            RadioListTile(
-                title: Text(
-                  "Green",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                secondary: Icon(
-                  FontAwesomeIcons.circle,
-                  color: Colors.green,
-                ),
-                value: Mood.greenSun,
-                groupValue: mood,
-                onChanged: (value) {
-                  setState(() {
-                    mood = value as Mood;
-                  });
-                }),
-            RadioListTile(
-                title: Text(
-                  "Blue",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                secondary: Icon(
-                  FontAwesomeIcons.faceSmile,
-                  color: Colors.blue,
-                ),
-                value: Mood.blueSun,
-                groupValue: mood,
-                onChanged: (value) {
-                  setState(() {
-                    mood = value as Mood;
-                  });
-                }),
-            RadioListTile(
-                title: Text(
-                  "Red",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                secondary: Icon(
-                  FontAwesomeIcons.circle,
-                  color: Colors.red,
-                ),
-                value: Mood.redSun,
-                groupValue: mood,
-                onChanged: (value) {
-                  setState(() {
-                    mood = value as Mood;
-                  });
-                }),
-            Divider(
-              color: Colors.blueGrey,
-              thickness: 5,
+        RadioListTile(
+            title: Text(
+              "Green",
+              style: TextStyle(
+                fontFamily: "Montserrat",
+                fontSize: 20,
+              ),
             ),
-            Padding(padding: EdgeInsets.only(bottom: 10)),
-          ],
-        ),
+            secondary: Icon(
+              FontAwesomeIcons.faceSmile,
+              color: Colors.green,
+            ),
+            value: Mood.greenSun,
+            groupValue: mood,
+            onChanged: (value) {
+              setState(() {
+                mood = value as Mood;
+              });
+            }),
+        RadioListTile(
+            title: Text(
+              "Blue",
+              style: TextStyle(
+                fontFamily: "Montserrat",
+                fontSize: 20,
+              ),
+            ),
+            secondary: Icon(
+              FontAwesomeIcons.faceMeh,
+              color: Colors.blue,
+            ),
+            value: Mood.blueSun,
+            groupValue: mood,
+            onChanged: (value) {
+              setState(() {
+                mood = value as Mood;
+              });
+            }),
+        RadioListTile(
+            title: Text(
+              "Red",
+              style: TextStyle(
+                fontFamily: "Montserrat",
+                fontSize: 20,
+              ),
+            ),
+            secondary: Icon(
+              FontAwesomeIcons.faceFrown,
+              color: Colors.red,
+            ),
+            value: Mood.redSun,
+            groupValue: mood,
+            onChanged: (value) {
+              setState(() {
+                mood = value as Mood;
+              });
+            }),
+        Padding(padding: EdgeInsets.only(bottom: 10)),
       ],
     );
   }

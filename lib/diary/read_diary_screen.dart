@@ -13,45 +13,27 @@ class ReadDiaryScreen extends StatelessWidget {
         .collection("Diaries");
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: Icon(Icons.arrow_back),
-            color: Colors.green,
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ),
-        actions: [
-          // IconButton(
-          //   icon: Icon(Icons.share_outlined),
-          //   color: Colors.green,
-          //   onPressed: () {},
-          // ),
-        ],
+        backgroundColor: Colors.green.shade200,
+        // leading: Builder(
+        //   builder: (context) => IconButton(
+        //     icon: Icon(Icons.arrow_back),
+        //     color: Colors.green,
+        //     onPressed: () {
+        //       Navigator.of(context).pop();
+        //     },
+        //   ),
+        // ),
       ),
-      //todo: add the sharing option to the application.
-      // bottomNavigationBar: Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child: OutlinedButton.icon(
-      //     icon: Icon(FontAwesomeIcons.share),
-      //     label: Text("share"),
+//
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green.shade200,
+        onPressed: () {},
+        child: Icon(Icons.share),
+      ),
       //
-      //     ///share the data with a friend.
-      //     onPressed: () {},
-      //     style: ElevatedButton.styleFrom(
-      //       side: BorderSide(width: 1.0, color: Colors.blue),
-      //       shape: RoundedRectangleBorder(
-      //         borderRadius: BorderRadius.circular(32.0),
-      //       ),
-      //     ),
-      //   ),
-      // ),
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -61,13 +43,20 @@ class ReadDiaryScreen extends StatelessWidget {
                   builder: (BuildContext context,
                       AsyncSnapshot<DocumentSnapshot> snapshot) {
                     if (snapshot.hasError) {
-                      return Text("Something went wrong!");
+                      return Text(
+                        "Something went wrong!",
+                        style: TextStyle(fontFamily: "Montserrat"),
+                      );
                     }
                     if (snapshot.hasData && !snapshot.data!.exists) {
-                      return Text("Document does not exist");
+                      return Text(
+                        "Document does not exist",
+                        style: TextStyle(fontFamily: "Montserrat"),
+                      );
                     }
                     if (snapshot.connectionState == ConnectionState.done) {
-                      Map<String, dynamic>? data = snapshot.data!.data() as Map<String, dynamic>?;
+                      Map<String, dynamic>? data =
+                          snapshot.data!.data() as Map<String, dynamic>?;
                       return Column(
                         children: [
                           Row(
@@ -75,8 +64,14 @@ class ReadDiaryScreen extends StatelessWidget {
                               Text(
                                 data?['dateCreated'],
                                 textScaleFactor: 1.5,
+                                style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    color: Colors.green.shade300),
                               ),
                             ],
+                          ),
+                          SizedBox(
+                            height: 5,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +79,10 @@ class ReadDiaryScreen extends StatelessWidget {
                               Flexible(
                                 child: Text(
                                   data?['title'],
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Montserrat",
+                                  ),
                                   textScaleFactor: 1.5,
                                 ),
                               ),
@@ -92,7 +90,8 @@ class ReadDiaryScreen extends StatelessWidget {
                           ),
                           Text(
                             data?['body'],
-                            textScaleFactor: 1.3,
+                            textScaleFactor: 1.4,
+                            style: TextStyle(fontFamily: "Montserrat"),
                           ),
                         ],
                       );

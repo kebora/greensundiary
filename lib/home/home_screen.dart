@@ -23,7 +23,15 @@ class HomeScreen extends StatelessWidget {
       text: "Do you want to logout?",
       confirmBtnText: "Yes",
       cancelBtnText: "No",
-      confirmBtnColor: Colors.green,
+      cancelBtnTextStyle: TextStyle(fontFamily: "Montserrat"),
+      confirmBtnTextStyle: TextStyle(fontFamily: "Montserrat"),
+      textTextStyle: TextStyle(fontFamily: "Montserrat", fontSize: 18),
+      titleTextStyle: TextStyle(
+        fontFamily: "Montserrat",
+        fontWeight: FontWeight.bold,
+        fontSize: 25,
+      ),
+      confirmBtnColor: Colors.green.shade200,
       onConfirmBtnTap: () {
         Navigator.of(context).pop(this);
         FirebaseAuth.instance.signOut().whenComplete(() {
@@ -51,8 +59,7 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               icon: Icon(
-                Icons.settings_outlined,
-                color: Colors.green,
+                Icons.settings,
               ),
               onPressed: () {
                 // return showDialog(
@@ -65,63 +72,80 @@ class HomeScreen extends StatelessWidget {
                 //     });
               })
         ],
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.green.shade200,
         leading: IconButton(
           icon: Icon(
             Icons.logout,
-            color: Colors.green,
           ),
-          color: Colors.green,
           onPressed: () {
             _logoutPopUp(context);
           },
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: OutlinedButton.icon(
-          icon: Icon(FontAwesomeIcons.book),
-          label: Text("View Diaries"),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) {
-                return ViewCreatedDiaries();
-              },
-            ));
-          },
-          style: ElevatedButton.styleFrom(
-            side: BorderSide(width: 1.0, color: Colors.blue),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32.0),
+      // bottomNavigationBar: Padding(
+      //   padding: const EdgeInsets.all(8.0),
+      //   child: SingleChildScrollView(
+      //     scrollDirection: Axis.horizontal,
+      //     child: Row(
+      //       children: [
+      //         OutlinedButton.icon(
+      //           icon: Icon(Icons.verified),
+      //           label: Text("Counselors"),
+      //           onPressed: () {
+      //             Navigator.of(context).push(MaterialPageRoute(
+      //               builder: (BuildContext context) {
+      //                 return ViewCreatedDiaries();
+      //               },
+      //             ));
+      //           },
+      //         ),
+      //         SizedBox(
+      //           width: 5,
+      //         ),
+      //         OutlinedButton.icon(
+      //           icon: Icon(Icons.chat),
+      //           label: Text("Chatroom"),
+      //           onPressed: () {
+      //             Navigator.of(context).push(MaterialPageRoute(
+      //               builder: (BuildContext context) {
+      //                 return ViewCreatedDiaries();
+      //               },
+      //             ));
+      //           },
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+      body: DoubleBackToCloseApp(
+        snackBar: SnackBar(
+          content: Text(
+            'Tap back again to exit',
+            style: TextStyle(
+              fontFamily: "Montserrat",
             ),
           ),
-        ),
-      ),
-      body: DoubleBackToCloseApp(
-        snackBar: const SnackBar(
-          content: Text('Tap back again to exit'),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.green.shade200,
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Welcome $firstName, below is your green sun chart!",
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textScaleFactor: 1.5,
+          child: ListView(
+            physics: BouncingScrollPhysics(parent: BouncingScrollPhysics()),
+            children: [
+              Text(
+                "Welcome $firstName,\nThis is your green sun chart!",
+                style: TextStyle(
+                  color: Colors.green,
+                  fontFamily: "Montserrat",
+                  fontWeight: FontWeight.w500,
                 ),
-                SizedBox(
-                  height: 50,
-                ),
-                ChartAndShare(user),
-              ],
-            ),
+                textScaleFactor: 1.5,
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              ChartAndShare(user),
+            ],
           ),
         ),
       ),
@@ -154,28 +178,45 @@ class ChartAndShare extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    IconButton(
-                      icon: Icon(FontAwesomeIcons.newspaper),
+                    ElevatedButton.icon(
                       onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return ArticleScreen();
-                        }));
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return ViewCreatedDiaries();
+                          },
+                        ));
                       },
-                      hoverColor: Colors.green,
-                      iconSize: 25,
+                      icon: Icon(Icons.bookmark),
+                      label: Text(
+                        "My Diaries",
+                        style: TextStyle(fontFamily: "Montserrat"),
+                      ),
                     ),
-                    IconButton(
-                      icon: Icon(FontAwesomeIcons.pen),
+
+                    ElevatedButton.icon(
                       onPressed: () {
                         Navigator.of(context).push(
                             MaterialPageRoute(builder: (BuildContext context) {
                           return AddDiaryScreen();
                         }));
                       },
-                      hoverColor: Colors.green,
-                      iconSize: 25,
+                      icon: Icon(Icons.add),
+                      label: Text(
+                        "Add New",
+                        style: TextStyle(fontFamily: "Montserrat"),
+                      ),
                     ),
+                    // IconButton(
+                    //   icon: Icon(FontAwesomeIcons.newspaper),
+                    //   onPressed: () {
+                    //     Navigator.of(context).push(
+                    //         MaterialPageRoute(builder: (BuildContext context) {
+                    //       return ArticleScreen();
+                    //     }));
+                    //   },
+                    //   hoverColor: Colors.green,
+                    //   iconSize: 25,
+                    // ),
                   ],
                 ),
               ],
@@ -184,11 +225,14 @@ class ChartAndShare extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Text(
               "Loading...",
-              style: TextStyle(color: Colors.green),
+              style: TextStyle(
+                color: Colors.green,
+                fontFamily: "Montserrat",
+              ),
             );
           }
 
-          ///I do this to return the empty circle with some cool lottie animation.
+          ///Return the empty circle with some cool lottie animation.
           return Column(
             children: [
               Lottie.asset("assets/images/emptychart.json",
@@ -197,6 +241,7 @@ class ChartAndShare extends StatelessWidget {
                 "Add a diary to unlock the chart!",
                 style: TextStyle(
                   color: Colors.red,
+                  fontFamily: "Montserrat",
                   fontWeight: FontWeight.bold,
                 ),
                 textScaleFactor: 1.3,

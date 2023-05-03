@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:greensundiary/authentication/auth_bloc/auth_bloc.dart';
 import 'package:greensundiary/authentication/auth_bloc/logo_bloc/logo_movement_bloc.dart';
 import 'package:greensundiary/home/home_screen.dart';
 import 'package:greensundiary/my_application.dart';
@@ -12,6 +13,9 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
       home: MyApp(),
     ),
   );
@@ -28,12 +32,16 @@ class _MyAppLogicStarts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Firebase.initializeApp(),
+        future: Authentication.initializeFirebase(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             User? user = FirebaseAuth.instance.currentUser;
             if (user != null) {
-              Get.off(HomeScreen(user: user));
+              //
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                Future.microtask(() => Get.off(() => HomeScreen(user: user)));
+              });
+              // Future.microtask(() => Get.off(HomeScreen(user: user)));
             }
 
             ///if no user, authenticate!
@@ -49,12 +57,8 @@ class _MyAppLogicStarts extends StatelessWidget {
               myText: "retrieving data...",
             );
           }
-          Get.off(BlocProvider(
-            create: (content) => SwitchCubit(),
-            child: MyApplication(),
-          ));
           return _Message(
-            myText: "${snapshot.error.toString()}",
+            myText: "wait a little...",
           );
         });
   }

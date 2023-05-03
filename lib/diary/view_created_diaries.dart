@@ -3,6 +3,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:greensundiary/diary/read_diary_screen.dart';
 
 ///I choose to display the following categories based on user filter choice.
@@ -21,13 +22,19 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
   ///the popUp function that allows filtration.
   Widget _changeQueryDialog(BuildContext context) {
     return AlertDialog(
-      title: Text("Select the desired category."),
+      title: Text(
+        "Select the desired category.",
+        style: TextStyle(fontFamily: "Montserrat"),
+      ),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              title: Text("Greens"),
+              title: Text(
+                "Greens",
+                style: TextStyle(fontFamily: "Montserrat"),
+              ),
               leading: CircleAvatar(
                 backgroundColor: Colors.green,
               ),
@@ -37,7 +44,10 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
               },
             ),
             ListTile(
-              title: Text("Blues"),
+              title: Text(
+                "Blues",
+                style: TextStyle(fontFamily: "Montserrat"),
+              ),
               leading: CircleAvatar(
                 backgroundColor: Colors.blue,
               ),
@@ -47,7 +57,10 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
               },
             ),
             ListTile(
-              title: Text("Reds"),
+              title: Text(
+                "Reds",
+                style: TextStyle(fontFamily: "Montserrat"),
+              ),
               leading: CircleAvatar(
                 backgroundColor: Colors.red,
               ),
@@ -57,7 +70,10 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
               },
             ),
             ListTile(
-              title: Text("View all"),
+              title: Text(
+                "View all",
+                style: TextStyle(fontFamily: "Montserrat"),
+              ),
               leading: CircleAvatar(
                 backgroundColor: Colors.transparent,
               ),
@@ -129,12 +145,10 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
     ///
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.green.shade200,
         leading: Builder(
           builder: (context) => IconButton(
             icon: Icon(Icons.arrow_back),
-            color: Colors.green,
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -143,7 +157,6 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
         actions: [
           IconButton(
             icon: Icon(Icons.filter_list_sharp),
-            color: Colors.green,
             onPressed: () {
               showDialog(
                   context: context,
@@ -167,7 +180,12 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                             : documentStream,
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
-                    return Text("Something went wrong!");
+                    return Text(
+                      "Something went wrong!",
+                      style: TextStyle(
+                        fontFamily: "Montserrat",
+                      ),
+                    );
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
@@ -187,7 +205,10 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                 ListTile(
                                   title: Text(
                                     document.data()?['dateCreated'],
-                                    style: TextStyle(),
+                                    style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                     textScaleFactor: 1.5,
                                   ),
                                   onTap: () {
@@ -230,6 +251,18 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                               "Confirm you want to delete ${document.data()?['title']}?",
                                           confirmBtnText: "Delete",
                                           cancelBtnText: "Cancel",
+                                          cancelBtnTextStyle: TextStyle(
+                                              fontFamily: "Montserrat"),
+                                          confirmBtnTextStyle: TextStyle(
+                                              fontFamily: "Montserrat"),
+                                          textTextStyle: TextStyle(
+                                              fontFamily: "Montserrat",
+                                              fontSize: 18),
+                                          titleTextStyle: TextStyle(
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25,
+                                          ),
                                           borderRadius: 5,
                                           confirmBtnColor:
                                               document.data()?['mood'] ==
@@ -244,16 +277,13 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                                 .then((value) {
                                               Navigator.of(context).pop();
                                             }).whenComplete(() {
-                                              // return AlertNoServerAutoDialog(
-                                              //     context: context,
-                                              //     alertAnimateType:
-                                              //         AlertAnimateType
-                                              //             .SlowAppear,
-                                              //     message:
-                                              //         "Diary record deleted successfully!",
-                                              //     alertType: AlertType.Success,
-                                              //     showDuration: 2)
-                                              //   ..show();
+                                              Get.snackbar(
+                                                "Alert",
+                                                "Message deleted successfully!",
+                                                colorText: Colors.white,
+                                                backgroundColor:
+                                                    Colors.green.shade200,
+                                              );
                                             });
                                           });
 
@@ -262,6 +292,7 @@ class _ViewCreatedDiariesState extends State<ViewCreatedDiaries> {
                                   ),
                                   subtitle: Text(
                                     document.data()?['title'],
+                                    style: TextStyle(fontFamily: "Montserrat"),
                                     textScaleFactor: 1.5,
                                   ),
                                   // horizontalTitleGap: 10,
