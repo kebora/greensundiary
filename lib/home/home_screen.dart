@@ -35,14 +35,6 @@ class HomeScreen extends StatelessWidget {
       ),
       confirmBtnColor: Colors.green.shade200,
       onConfirmBtnTap: () => Authentication().handleSignOut(),
-      // Navigator.of(context).pop(this);
-      // FirebaseAuth.instance.signOut().whenComplete(() {
-      //   Navigator.of(context).pushReplacement(
-      //       MaterialPageRoute(builder: (BuildContext context) {
-      //     return MyApp();
-      //   }));
-      // });
-
       animType: CoolAlertAnimType.rotate,
     );
   }
