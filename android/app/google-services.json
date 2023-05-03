@@ -7,12 +7,197 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:164163401313:android:9f7d9ea04a8a00bb4ddc20",
+        "android_client_info": {
+          "package_name": "com.example.danielsimiyu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdX4jUkoyHCcca_n-8HlDe5xJVp6OyfJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:164163401313:android:0ad84c36a477ed7d4ddc20",
         "android_client_info": {
           "package_name": "com.simiyu.greensundiary"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "164163401313-1iu9bjcq4gegkvobckgm8tauvubs1620.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simiyu.greensundiary",
+            "certificate_hash": "0c0a5eb9c80192b848a0056ac445680c3fa5881c"
+          }
+        },
+        {
+          "client_id": "164163401313-8bt1v59k5l71ela9ita5pt1rlj9ata6p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simiyu.greensundiary",
+            "certificate_hash": "65daaba7cd7fd4c4e3d0e1b197558ee7b578afc9"
+          }
+        },
+        {
+          "client_id": "164163401313-g4vphov71c3nqo8bvub43dke31sf9kcn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simiyu.greensundiary",
+            "certificate_hash": "11301e43ac359eae7dc0155c4e5f831248c4e0e3"
+          }
+        },
+        {
+          "client_id": "164163401313-qmpt2671d2mo0odgoqagrn5omc78842e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simiyu.greensundiary",
+            "certificate_hash": "5b21d535e38bada9ce5880d8f2b3d4be16620360"
+          }
+        },
+        {
+          "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdX4jUkoyHCcca_n-8HlDe5xJVp6OyfJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164163401313:android:26f9e214fb7cd9a64ddc20",
+        "android_client_info": {
+          "package_name": "com.simiyu.p2p"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdX4jUkoyHCcca_n-8HlDe5xJVp6OyfJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164163401313:android:c7aaa2892e83547c4ddc20",
+        "android_client_info": {
+          "package_name": "com.simiyu.sesc_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdX4jUkoyHCcca_n-8HlDe5xJVp6OyfJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164163401313:android:e733c6efdea8afe04ddc20",
+        "android_client_info": {
+          "package_name": "com.simiyu.uhadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdX4jUkoyHCcca_n-8HlDe5xJVp6OyfJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164163401313:android:32499398a71b3b3f4ddc20",
+        "android_client_info": {
+          "package_name": "com.simiyu.zoom_auto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164163401313-fp9t8rm3vbd1t3m21ct9c0sngdgh4r4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simiyu.zoom_auto",
+            "certificate_hash": "0c0a5eb9c80192b848a0056ac445680c3fa5881c"
+          }
+        },
         {
           "client_id": "164163401313-adhh3fci46il9hsrn4ll2jnbtp7i2rlb.apps.googleusercontent.com",
           "client_type": 3

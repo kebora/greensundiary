@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:greensundiary/authentication/auth_bloc/google/continue_with_google.dart';
+import 'package:get/get.dart';
 import 'package:greensundiary/authentication/auth_bloc/logo_bloc/logo_movement_bloc.dart';
 import 'package:greensundiary/home/home_screen.dart';
 import 'package:greensundiary/my_application.dart';
@@ -10,7 +10,7 @@ import 'package:greensundiary/my_application.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    MaterialApp(
+    GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: MyApp(),
     ),
@@ -28,18 +28,12 @@ class _MyAppLogicStarts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Authentication.initializeFirebase(context),
+        future: Firebase.initializeApp(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             User? user = FirebaseAuth.instance.currentUser;
             if (user != null) {
-              SchedulerBinding.instance.addPostFrameCallback((_) {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(user: user),
-                  ),
-                );
-              });
+              Get.off(HomeScreen(user: user));
             }
 
             ///if no user, authenticate!
@@ -55,8 +49,12 @@ class _MyAppLogicStarts extends StatelessWidget {
               myText: "retrieving data...",
             );
           }
+          Get.off(BlocProvider(
+            create: (content) => SwitchCubit(),
+            child: MyApplication(),
+          ));
           return _Message(
-            myText: "working on your application...",
+            myText: "${snapshot.error.toString()}",
           );
         });
   }
@@ -73,11 +71,13 @@ class _Message extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Image.asset(
-            //   "assets/images/background/playstore.png",
-            //   height: 100,
-            // ),
-            Text(myText),
+            Text(
+              myText,
+              style: TextStyle(
+                fontFamily: "Montserrat",
+                fontSize: 20,
+              ),
+            ),
           ],
         ),
       ),

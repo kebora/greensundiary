@@ -1,1 +1,0 @@
-enum MyEvent { eventA, eventB }

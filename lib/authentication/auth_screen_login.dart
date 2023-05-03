@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'auth_bloc/auth_bloc.dart';
 import 'package:greensundiary/constants.dart';
-import 'package:greensundiary/home/home_screen.dart';
 import 'package:greensundiary/logo/logo_switch.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -293,40 +291,20 @@ class _GoogleAccountButton extends StatelessWidget {
         stream: bloc.submitValid,
         builder: (context, snapshot) {
           return SizedBox(
-            height: 45,
-            child: ElevatedButton.icon(
-              label: const Text(
-                'CONTINUE WITH GOOGLE',
-                style: TextStyle(color: Colors.white, fontFamily: "Montserrat"),
-              ),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-              ),
-              icon: Icon(FontAwesomeIcons.google, color: Colors.white),
-              onPressed: snapshot.hasData ? null : function1,
-            ),
-          );
+              height: 45,
+              child: ElevatedButton.icon(
+                  label: const Text(
+                    'CONTINUE WITH GOOGLE',
+                    style: TextStyle(
+                        color: Colors.white, fontFamily: "Montserrat"),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                  ),
+                  icon: Icon(FontAwesomeIcons.google, color: Colors.white),
+                  onPressed: () => Authentication().handleSignIn()));
         });
-  }
-
-  //func 1
-  void function1() {
-    return function2(context, bloc);
-  }
-
-  //func 2
-  void function2(context, bloc) async {
-    User? user = await Authentication.signInWithGoogle(context: context);
-
-    ///If a user is found then we can pass the data to the HomeScreen.
-    if (user != null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(user: user),
-        ),
-      );
-    }
   }
 }

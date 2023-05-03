@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'auth_bloc/auth_bloc.dart';
@@ -22,12 +21,10 @@ class SignUpScreen extends StatelessWidget {
                 child: LogoSwitch(),
               ),
               _SizedBox(size: sizedBoxHeight),
-              //email address
               _InputEmailAddress(
                 bloc: bloc,
               ),
               _SizedBox(size: sizedBoxHeight),
-              //password
               _InputPassword(
                 bloc: bloc,
               ),
@@ -36,10 +33,8 @@ class SignUpScreen extends StatelessWidget {
                 bloc: bloc,
               ),
               _SizedBox(size: sizedBoxHeight),
-              //create account button
               _SignUpButton(context: context, bloc: bloc),
               _SizedBox(size: sizedBoxHeight),
-              //Forgot password
               _GoogleAccount(context: context, bloc: bloc),
             ],
           ),
@@ -223,34 +218,21 @@ class _GoogleAccountButton extends StatelessWidget {
           stream: bloc.submitValid,
           builder: (context, snapshot) {
             return ElevatedButton.icon(
-              label: const Text(
-                'CONTINUE WITH GOOGLE',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "Montserrat",
+                label: const Text(
+                  'CONTINUE WITH GOOGLE',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "Montserrat",
+                  ),
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
                 ),
-              ),
-              icon: Icon(FontAwesomeIcons.google, color: Colors.white),
-              onPressed: snapshot.hasData ? null : function1,
-            );
+                icon: Icon(FontAwesomeIcons.google, color: Colors.white),
+                onPressed: () => Authentication().handleSignIn());
           }),
     );
-  }
-
-  //func 1
-  void function1() {
-    return function2(context, bloc);
-  }
-
-  //func 2
-  void function2(context, bloc) async {
-    // ignore: unused_local_variable
-    User? user = await Authentication.signInWithGoogle(context: context);
-    //If a user is found then we can pass the data to the HomeScreen.
   }
 }

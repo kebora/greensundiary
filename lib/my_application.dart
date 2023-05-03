@@ -19,16 +19,11 @@ class MyApplication extends StatelessWidget {
     return SignUpProvider(
       child: LoginProvider(
         child: RPProvider(
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'greensundiary',
-            // Calling the authentication screen
-            home: Scaffold(
-              body: Center(
-                child: BlocBuilder<SwitchCubit, bool>(
-                  builder: (_, state) =>
-                      state == false ? LoginScreen() : SignUpScreen(),
-                ),
+          child: Scaffold(
+            body: Center(
+              child: BlocBuilder<SwitchCubit, bool>(
+                builder: (_, state) =>
+                    state == false ? LoginScreen() : SignUpScreen(),
               ),
             ),
           ),
