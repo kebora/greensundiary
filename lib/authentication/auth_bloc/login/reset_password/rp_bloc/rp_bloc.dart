@@ -24,7 +24,12 @@ class RPBloc extends Object with RPValidators {
     await _auth.sendPasswordResetEmail(email: validEmail).whenComplete(() {
       FocusScope.of(context).unfocus();
       Navigator.of(context).pop();
+      Get.snackbar(
+        "Sending reset email...",
+        "Check your inbox",
+      );
     }).onError((error, stackTrace) {
+      Get.back();
       Get.snackbar(
         "Error",
         error.toString(),
