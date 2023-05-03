@@ -14,21 +14,6 @@ class ReadDiaryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green.shade200,
-        // leading: Builder(
-        //   builder: (context) => IconButton(
-        //     icon: Icon(Icons.arrow_back),
-        //     color: Colors.green,
-        //     onPressed: () {
-        //       Navigator.of(context).pop();
-        //     },
-        //   ),
-        // ),
-      ),
-//
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green.shade200,
-        onPressed: () {},
-        child: Icon(Icons.copy),
       ),
       //
       body: SafeArea(
