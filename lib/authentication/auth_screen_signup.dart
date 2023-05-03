@@ -54,6 +54,10 @@ class _InputEmailAddress extends StatelessWidget {
         stream: bloc.email,
         builder: (context, snapshot) {
           return TextField(
+            style: TextStyle(
+              fontFamily: "Montserrat",
+              fontSize: 18,
+            ),
             onChanged: bloc.changeEmail,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
@@ -80,6 +84,10 @@ class _InputPassword extends StatelessWidget {
         stream: bloc.password,
         builder: (context, snapshot) {
           return TextField(
+            style: TextStyle(
+              fontFamily: "Montserrat",
+              fontSize: 18,
+            ),
             onChanged: bloc.changePassword,
             obscureText: true,
             decoration: InputDecoration(
@@ -105,6 +113,10 @@ class _InputConfirmPassword extends StatelessWidget {
         stream: bloc.confirmPassword,
         builder: (context, snapshot) {
           return TextField(
+            style: TextStyle(
+              fontFamily: "Montserrat",
+              fontSize: 18,
+            ),
             onChanged: bloc.changeConfirmPassword,
             obscureText: true,
             decoration: InputDecoration(
@@ -226,10 +238,7 @@ class _GoogleAccountButton extends StatelessWidget {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
+                    backgroundColor: Colors.blue.shade300),
                 icon: Icon(FontAwesomeIcons.google, color: Colors.white),
                 onPressed: () => Authentication().handleSignIn());
           }),

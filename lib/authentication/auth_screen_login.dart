@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'auth_bloc/auth_bloc.dart';
 import 'package:greensundiary/constants.dart';
 import 'package:greensundiary/logo/logo_switch.dart';
@@ -55,6 +56,10 @@ class _InputEmailAddress extends StatelessWidget {
         stream: bloc.email,
         builder: (context, snapshot) {
           return TextField(
+            style: TextStyle(
+              fontFamily: "Montserrat",
+              fontSize: 18,
+            ),
             onChanged: bloc.changeEmail,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
@@ -80,6 +85,10 @@ class _InputPassword extends StatelessWidget {
         stream: bloc.password,
         builder: (context, snapshot) {
           return TextField(
+            style: TextStyle(
+              fontFamily: "Montserrat",
+              fontSize: 18,
+            ),
             onChanged: bloc.changePassword,
             obscureText: true,
             decoration: InputDecoration(
@@ -213,48 +222,48 @@ class _SendPasswordLinkButton extends StatelessWidget {
 }
 
 _showIt(BuildContext inContext, RPBloc rpBloc) {
-  showModalBottomSheet(
-      context: inContext,
-      builder: (BuildContext inContext) {
-        return Card(
-          margin: EdgeInsets.all(20.0),
-          child: Container(
-            height: 200,
-            child: SingleChildScrollView(
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-                StreamBuilder<Object>(
-                    stream: rpBloc.email,
-                    builder: (context, snapshot) {
-                      return TextField(
-                        onChanged: rpBloc.changeEmail,
-                        decoration: InputDecoration(
-                          filled: true,
-                          hintText: "Enter Email address",
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                        ),
-                      );
-                    }),
-                _SendPasswordLinkButton(
-                  context: inContext,
-                  rpBloc: rpBloc,
-                ),
-                TextButton(
-                    child: Text(
-                      "Cancel",
-                      style: TextStyle(fontFamily: "Montserrat"),
-                    ),
-                    onPressed: () {
-                      Navigator.of(inContext).pop();
-                    }),
-              ]),
-            ),
+  Get.bottomSheet(Card(
+    margin: EdgeInsets.all(20.0),
+    child: Container(
+      height: 200,
+      child: SingleChildScrollView(
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          StreamBuilder<Object>(
+              stream: rpBloc.email,
+              builder: (context, snapshot) {
+                return TextField(
+                  style: TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 18,
+                  ),
+                  onChanged: rpBloc.changeEmail,
+                  decoration: InputDecoration(
+                    filled: true,
+                    hintText: "Enter Email address",
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                  ),
+                );
+              }),
+          _SendPasswordLinkButton(
+            context: inContext,
+            rpBloc: rpBloc,
           ),
-        );
-      });
+          TextButton(
+              child: Text(
+                "Cancel",
+                style: TextStyle(fontFamily: "Montserrat"),
+              ),
+              onPressed: () {
+                Navigator.of(inContext).pop();
+              }),
+        ]),
+      ),
+    ),
+  ));
 }
 
 //create a new account
@@ -293,17 +302,17 @@ class _GoogleAccountButton extends StatelessWidget {
           return SizedBox(
               height: 45,
               child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue.shade300),
                   label: const Text(
                     'CONTINUE WITH GOOGLE',
                     style: TextStyle(
-                        color: Colors.white, fontFamily: "Montserrat"),
+                        fontFamily: "Montserrat", color: Colors.white),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
+                  icon: Icon(
+                    FontAwesomeIcons.google,
+                    color: Colors.white,
                   ),
-                  icon: Icon(FontAwesomeIcons.google, color: Colors.white),
                   onPressed: () => Authentication().handleSignIn()));
         });
   }

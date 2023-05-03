@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 import 'package:greensundiary/home/home_screen.dart';
+import 'package:greensundiary/main.dart';
 import 'package:greensundiary/my_application.dart';
 
 class Authentication {
@@ -47,7 +48,7 @@ class Authentication {
   //
   void handleSignOut() async {
     googleSignIn.signOut().whenComplete(() {
-      Get.offAll(MyApplication());
+      Get.offAll(LogoutWidget());
     });
   }
 

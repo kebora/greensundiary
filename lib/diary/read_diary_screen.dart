@@ -28,7 +28,7 @@ class ReadDiaryScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green.shade200,
         onPressed: () {},
-        child: Icon(Icons.share),
+        child: Icon(Icons.copy),
       ),
       //
       body: SafeArea(

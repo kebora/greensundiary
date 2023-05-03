@@ -41,7 +41,6 @@ class _MyAppLogicStarts extends StatelessWidget {
               SchedulerBinding.instance.addPostFrameCallback((_) {
                 Future.microtask(() => Get.off(() => HomeScreen(user: user)));
               });
-              // Future.microtask(() => Get.off(HomeScreen(user: user)));
             }
 
             ///if no user, authenticate!
@@ -85,6 +84,18 @@ class _Message extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class LogoutWidget extends StatelessWidget {
+  const LogoutWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (content) => SwitchCubit(),
+      child: MyApplication(),
     );
   }
 }

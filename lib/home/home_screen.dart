@@ -4,6 +4,8 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:greensundiary/authentication/auth_bloc/auth_bloc.dart';
 import 'package:greensundiary/diary/add_diary_screen.dart';
 import 'package:greensundiary/diary/article_screen.dart';
 import 'package:greensundiary/diary/chart.dart';
@@ -32,15 +34,15 @@ class HomeScreen extends StatelessWidget {
         fontSize: 25,
       ),
       confirmBtnColor: Colors.green.shade200,
-      onConfirmBtnTap: () {
-        Navigator.of(context).pop(this);
-        FirebaseAuth.instance.signOut().whenComplete(() {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (BuildContext context) {
-            return MyApp();
-          }));
-        });
-      },
+      onConfirmBtnTap: () => Authentication().handleSignOut(),
+      // Navigator.of(context).pop(this);
+      // FirebaseAuth.instance.signOut().whenComplete(() {
+      //   Navigator.of(context).pushReplacement(
+      //       MaterialPageRoute(builder: (BuildContext context) {
+      //     return MyApp();
+      //   }));
+      // });
+
       animType: CoolAlertAnimType.rotate,
     );
   }
@@ -61,16 +63,7 @@ class HomeScreen extends StatelessWidget {
               icon: Icon(
                 Icons.settings,
               ),
-              onPressed: () {
-                // return showDialog(
-                //     context: context,
-                //     builder: (_) {
-                //       AlertDialog(
-                //         title: Text("Account Management"),
-                //         content: Text(accountDeactivation),
-                //       );
-                //     });
-              })
+              onPressed: () {})
         ],
         backgroundColor: Colors.green.shade200,
         leading: IconButton(
@@ -82,41 +75,6 @@ class HomeScreen extends StatelessWidget {
           },
         ),
       ),
-      // bottomNavigationBar: Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child: SingleChildScrollView(
-      //     scrollDirection: Axis.horizontal,
-      //     child: Row(
-      //       children: [
-      //         OutlinedButton.icon(
-      //           icon: Icon(Icons.verified),
-      //           label: Text("Counselors"),
-      //           onPressed: () {
-      //             Navigator.of(context).push(MaterialPageRoute(
-      //               builder: (BuildContext context) {
-      //                 return ViewCreatedDiaries();
-      //               },
-      //             ));
-      //           },
-      //         ),
-      //         SizedBox(
-      //           width: 5,
-      //         ),
-      //         OutlinedButton.icon(
-      //           icon: Icon(Icons.chat),
-      //           label: Text("Chatroom"),
-      //           onPressed: () {
-      //             Navigator.of(context).push(MaterialPageRoute(
-      //               builder: (BuildContext context) {
-      //                 return ViewCreatedDiaries();
-      //               },
-      //             ));
-      //           },
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
       body: DoubleBackToCloseApp(
         snackBar: SnackBar(
           content: Text(

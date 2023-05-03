@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:greensundiary/authentication/auth_bloc/login/reset_password/rp_bloc/rp_validators.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
@@ -23,20 +24,10 @@ class RPBloc extends Object with RPValidators {
     await _auth.sendPasswordResetEmail(email: validEmail).whenComplete(() {
       FocusScope.of(context).unfocus();
       Navigator.of(context).pop();
-      return ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content:
-              Text("Success! Check your email address for the reset link!"),
-          backgroundColor: Colors.green,
-        ),
-      );
     }).onError((error, stackTrace) {
-      return ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            error.toString(),
-          ),
-        ),
+      Get.snackbar(
+        "Error",
+        error.toString(),
       );
     });
   }
