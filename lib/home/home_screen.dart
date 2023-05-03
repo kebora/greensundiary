@@ -3,14 +3,12 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:greensundiary/authentication/auth_bloc/auth_bloc.dart';
 import 'package:greensundiary/diary/add_diary_screen.dart';
-import 'package:greensundiary/diary/article_screen.dart';
 import 'package:greensundiary/diary/chart.dart';
 import 'package:greensundiary/diary/view_created_diaries.dart';
-import 'package:greensundiary/main.dart';
+import 'package:greensundiary/settings/settings_screen.dart';
 import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -53,9 +51,11 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               icon: Icon(
-                Icons.settings,
+                Icons.article,
               ),
-              onPressed: () {})
+              onPressed: () {
+                Get.to(() => SettingsScreen());
+              })
         ],
         backgroundColor: Colors.green.shade200,
         leading: IconButton(
@@ -142,7 +142,6 @@ class ChartAndShare extends StatelessWidget {
                         style: TextStyle(fontFamily: "Montserrat"),
                       ),
                     ),
-
                     ElevatedButton.icon(
                       onPressed: () {
                         Navigator.of(context).push(
@@ -156,17 +155,6 @@ class ChartAndShare extends StatelessWidget {
                         style: TextStyle(fontFamily: "Montserrat"),
                       ),
                     ),
-                    // IconButton(
-                    //   icon: Icon(FontAwesomeIcons.newspaper),
-                    //   onPressed: () {
-                    //     Navigator.of(context).push(
-                    //         MaterialPageRoute(builder: (BuildContext context) {
-                    //       return ArticleScreen();
-                    //     }));
-                    //   },
-                    //   hoverColor: Colors.green,
-                    //   iconSize: 25,
-                    // ),
                   ],
                 ),
               ],

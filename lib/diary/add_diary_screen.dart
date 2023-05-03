@@ -45,15 +45,6 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        // backgroundColor: Colors.green.shade200,
-        // leading: Builder(
-        //   builder: (context) => IconButton(
-        //     icon: Icon(Icons.arrow_back),
-        //     onPressed: () {
-        //       Navigator.of(context).pop();
-        //     },
-        //   ),
-        // ),
       ),
       bottomNavigationBar: _SubmitDetails(
         bloc: bloc,

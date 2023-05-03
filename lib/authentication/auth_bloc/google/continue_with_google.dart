@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 import 'package:greensundiary/home/home_screen.dart';
 import 'package:greensundiary/main.dart';
-import 'package:greensundiary/my_application.dart';
 
 class Authentication {
   //create an instance of the google sign in class
@@ -32,12 +29,11 @@ class Authentication {
       final UserCredential userCredential =
           await auth.signInWithCredential(credential);
       final User user = userCredential.user!;
-      log(user.email.toString());
+      // log(user.email.toString());
       await user.updateEmail(account.email).whenComplete(() {
         Get.off(HomeScreen(user: user));
       });
     } catch (e) {
-      log("${e.toString()}");
       Get.snackbar(
         "Oops!",
         "${e.toString()}",

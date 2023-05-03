@@ -38,14 +38,13 @@ dependencies:
   google_sign_in: ^6.1.0
   intl: ^0.18.1
   lottie: ^2.3.2
-  marquee: ^2.1.0
   pie_chart: ^5.0.0
   rive: ^0.10.4
   rxdart: ^0.27.7
   share: ^2.0.1
   shared_preferences: ^2.0.5
   social_share: ^2.3.1
-  url_launcher: ^6.0.3
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1

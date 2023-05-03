@@ -1,4 +1,14 @@
 //auth screen
+import 'package:flutter/material.dart';
+
 double sizedBoxHeight = 10;
-String accountDeactivation =
-    "In case of any challenge, send an email to msd110547@gmail.com";
+
+// default textStyle
+TextStyle textStyleNormal = TextStyle(
+  fontFamily: "Montserrat",
+);
+
+TextStyle textStyleBold = TextStyle(
+  fontFamily: "Montserrat",
+  fontWeight: FontWeight.bold,
+);
