@@ -77,7 +77,7 @@ class SettingsScreen extends StatelessWidget {
                                   await _launchUrl(_url);
                                 },
                                 child: Text(
-                                  "Read",
+                                  "View",
                                   style: TextStyle(
                                     fontFamily: "Montserrat",
                                     fontSize: 20,
